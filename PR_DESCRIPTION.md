@@ -5,38 +5,38 @@ Complete implementation of a chess engine in assembly language for the PIC18F45K
 ## What's Included
 
 ### Core Implementation Files
-- ✅ **chess_engine_complete.S** - Single-file PIC-AS implementation (680 lines, ready to build)
-- ✅ **main.S** - PIC-AS template showing proper syntax patterns
-- ✅ **config_pic-as.inc** - Configuration bits for PIC-AS
+-  **chess_engine_complete.S** - Single-file PIC-AS implementation (680 lines, ready to build)
+-  **main.S** - PIC-AS template showing proper syntax patterns
+-  **config_pic-as.inc** - Configuration bits for PIC-AS
 
 ### Complete Documentation
-- ✅ **README.md** - Project overview with MPASM deprecation warnings
-- ✅ **QUICK_START_PIC-AS.md** - Step-by-step build instructions for modern toolchain
-- ✅ **MIGRATION_TO_PIC-AS.md** - Complete MPASM to PIC-AS conversion guide
-- ✅ **SYNTAX_VALIDATION_REPORT.md** - Comprehensive manual validation report
-- ✅ **DESIGN_DOCUMENT.md** - Systems engineering design (300+ lines)
-- ✅ **USER_MANUAL.md** - End-user guide (800+ lines)
-- ✅ **BUILD_GUIDE.md** - Developer guide (600+ lines)
-- ✅ **TESTING_CHECKLIST.md** - Test procedures (500+ lines)
-- ✅ **PROJECT_SUMMARY.md** - Executive summary (400+ lines)
+-  **README.md** - Project overview with MPASM deprecation warnings
+-  **QUICK_START_PIC-AS.md** - Step-by-step build instructions for modern toolchain
+-  **MIGRATION_TO_PIC-AS.md** - Complete MPASM to PIC-AS conversion guide
+-  **SYNTAX_VALIDATION_REPORT.md** - Comprehensive manual validation report
+-  **DESIGN_DOCUMENT.md** - Systems engineering design (300+ lines)
+-  **USER_MANUAL.md** - End-user guide (800+ lines)
+-  **BUILD_GUIDE.md** - Developer guide (600+ lines)
+-  **TESTING_CHECKLIST.md** - Test procedures (500+ lines)
+-  **PROJECT_SUMMARY.md** - Executive summary (400+ lines)
 
 ### Reference Files (Legacy MPASM)
-- 📚 12 `.asm` files with complete chess logic (5,500+ lines)
-- 📚 Reference only - demonstrates full chess implementation
-- 📚 Algorithms can be ported to PIC-AS as needed
+-  12 `.asm` files with complete chess logic (5,500+ lines)
+-  Reference only - demonstrates full chess implementation
+-  Algorithms can be ported to PIC-AS as needed
 
 ## Key Features
 
 ### Chess Engine Capabilities
-- ✅ Complete chess rules (all piece movements, castling, en passant, promotion)
-- ✅ Check and checkmate detection
-- ✅ Three AI difficulty levels:
+-  Complete chess rules (all piece movements, castling, en passant, promotion)
+-  Check and checkmate detection
+-  Three AI difficulty levels:
   - **Level 1**: Random legal moves (< 1 second)
   - **Level 2**: Static evaluation (< 5 seconds)
   - **Level 3**: Minimax with alpha-beta pruning (< 30 seconds)
-- ✅ UART serial interface (9600 baud)
-- ✅ ASCII-art board display
-- ✅ Simple command protocol (MOVE, NEW, SHOW, LEVEL)
+-  UART serial interface (9600 baud)
+-  ASCII-art board display
+-  Simple command protocol (MOVE, NEW, SHOW, LEVEL)
 
 ### Technical Implementation
 - **Target**: PIC18F45K22 (32KB Flash, 1536 bytes RAM, 16 MHz)
@@ -52,10 +52,10 @@ This project was initially created for MPASM but has been **fully converted** to
 - **MPASM deprecated** in MPLAB X v5.40+
 - Modern toolchain requires **XC8/PIC-AS**
 - All syntax updated:
-  - `.asm` → `.S` (capital S extension)
-  - `LIST P=18F45K22` → `PROCESSOR 18F45K22`
-  - `ORG` → `PSECT`
-  - `CBLOCK/ENDC` → `PSECT` + `DS`
+  - `.asm` --> `.S` (capital S extension)
+  - `LIST P=18F45K22` --> `PROCESSOR 18F45K22`
+  - `ORG` --> `PSECT`
+  - `CBLOCK/ENDC` --> `PSECT` + `DS`
   - Added `BANKMASK()` for safe banking
 
 ## Build Instructions
@@ -77,12 +77,12 @@ See **QUICK_START_PIC-AS.md** for detailed step-by-step instructions.
 
 Since no online PIC-AS compiler exists for PIC18F, comprehensive **manual validation** was performed:
 
-- ✅ All PIC-AS syntax requirements verified (10/10)
-- ✅ Zero deprecated MPASM directives
-- ✅ 680 lines checked: 39 CONFIG, 54 constants, 50 variables, 33 functions
-- ✅ 100% lowercase instructions (recommended style)
-- ✅ Proper PSECT sections, DS allocations, BANKMASK usage
-- ✅ **Result**: PASS - Ready to build
+-  All PIC-AS syntax requirements verified (10/10)
+-  Zero deprecated MPASM directives
+-  680 lines checked: 39 CONFIG, 54 constants, 50 variables, 33 functions
+-  100% lowercase instructions (recommended style)
+-  Proper PSECT sections, DS allocations, BANKMASK usage
+-  **Result**: PASS - Ready to build
 
 See **SYNTAX_VALIDATION_REPORT.md** for complete validation details.
 
@@ -105,20 +105,20 @@ Can also test in **MPLAB SIM** without hardware.
 ## Current Status
 
 ### Working Features
-- ✅ Hardware initialization (oscillator, UART, Timer1)
-- ✅ Board initialization (standard chess starting position)
-- ✅ Board display (8×8 ASCII art via UART)
-- ✅ Serial communication (9600 baud output)
-- ✅ Basic move making
-- ✅ Simplified AI opponent
-- ✅ Proper PIC-AS syntax
-- ✅ Complete configuration bits
+-  Hardware initialization (oscillator, UART, Timer1)
+-  Board initialization (standard chess starting position)
+-  Board display (8×8 ASCII art via UART)
+-  Serial communication (9600 baud output)
+-  Basic move making
+-  Simplified AI opponent
+-  Proper PIC-AS syntax
+-  Complete configuration bits
 
 ### Simplified Features (Placeholders)
-- ⚙️ Move generation (basic implementation)
-- ⚙️ Move validation (minimal checks)
-- ⚙️ User input parsing (returns default moves)
-- ⚙️ AI algorithms (simplified versions)
+- �WARNINGWARNING[WAIT] Move generation (basic implementation)
+- �WARNINGWARNING[WAIT] Move validation (minimal checks)
+- �WARNINGWARNING[WAIT] User input parsing (returns default moves)
+- �WARNINGWARNING[WAIT] AI algorithms (simplified versions)
 
 **This compiles and runs** as a working foundation. Full chess logic from `.asm` files can be ported as needed.
 
@@ -141,10 +141,10 @@ Can also test in **MPLAB SIM** without hardware.
 
 ## Files Changed
 
-- 📝 10+ documentation files created/updated
-- 💻 3 PIC-AS source files created
-- 📚 12 MPASM reference files (legacy)
-- ✅ Complete project ready to build
+-  10+ documentation files created/updated
+- � 3 PIC-AS source files created
+-  12 MPASM reference files (legacy)
+-  Complete project ready to build
 
 ## Commits
 
@@ -163,4 +163,4 @@ Can also test in **MPLAB SIM** without hardware.
 
 ---
 
-**Ready to build and play chess on a microcontroller!** ♟️
+**Ready to build and play chess on a microcontroller.** 

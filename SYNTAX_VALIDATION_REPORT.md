@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-**Result**: âœ… **PASS** - All critical PIC-AS syntax requirements verified
+**Result**:  **PASS** - All critical PIC-AS syntax requirements verified
 
 The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v5.40+ and XC8 compiler. No deprecated MPASM directives detected. All critical syntax patterns are correct.
 
@@ -22,7 +22,7 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
 
 ## Validation Checks Performed
 
-### âœ… 1. File Header and Processor Declaration
+###  1. File Header and Processor Declaration
 - **File Extension**: `.S` (capital S) - Correct for PIC-AS
 - **PROCESSOR Directive**: Found at line 14
   ```assembly
@@ -32,9 +32,9 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   ```assembly
   #include <xc.inc>
   ```
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 2. Configuration Bits
+###  2. Configuration Bits
 - **Count**: 39 CONFIG directives
 - **Syntax**: All use proper PIC-AS format
   ```assembly
@@ -43,9 +43,9 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   CONFIG MCLRE = EXTMCLR
   ```
 - **Coverage**: Complete configuration for PIC18F45K22
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 3. Constant Definitions
+###  3. Constant Definitions
 - **EQU Directives**: 54 constants defined
 - **Examples**:
   ```assembly
@@ -55,9 +55,9 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   DIR_N       EQU 8
   ```
 - **Naming**: Consistent uppercase with underscores
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 4. Variable Declarations
+###  4. Variable Declarations
 - **PSECT Count**: 2 data sections
   - `PSECT udata_acs` (Access bank - 8 variables)
   - `PSECT udata_bank0` (Banked RAM - 42 variables)
@@ -73,9 +73,9 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
       board:              DS 64
       move_list:          DS 280
   ```
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 5. Code Sections
+###  5. Code Sections
 - **PSECT Declarations**: 2 code sections
   - `PSECT resetVec,class=CODE,reloc=2` (Reset vector)
   - `PSECT code` (Main code)
@@ -85,18 +85,18 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   resetVec:
       goto    start
   ```
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 6. Instruction Case
+###  6. Instruction Case
 - **Lowercase Instructions**: 257 instances (correct style)
   ```assembly
   movlw, movwf, movf, call, goto, return, bra, etc.
   ```
 - **Uppercase Instructions**: 0 instances
 - **Consistency**: 100% lowercase (recommended PIC-AS style)
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 7. Label Definitions
+###  7. Label Definitions
 - **Labels with Colons**: 33 function labels
 - **Examples**:
   ```assembly
@@ -107,9 +107,9 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   ai_make_move:
   ```
 - **Naming Convention**: Consistent lowercase with underscores
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 8. Banking Access
+###  8. Banking Access
 - **BANKMASK Usage**: 58 instances
 - **Examples**:
   ```assembly
@@ -118,23 +118,23 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
   movf    BANKMASK(board), W
   ```
 - **Purpose**: Correct macro for accessing banked RAM
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 9. Deprecated MPASM Directives
+###  9. Deprecated MPASM Directives
 - **Checked For**:
-  - `ORG` - Not found âœ…
-  - `CBLOCK` - Not found âœ…
-  - `ENDC` - Not found âœ…
-  - `LIST` - Not found âœ…
+  - `ORG` - Not found 
+  - `CBLOCK` - Not found 
+  - `ENDC` - Not found 
+  - `LIST` - Not found 
 - **Result**: No deprecated directives detected
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
-### âœ… 10. Program Termination
+###  10. Program Termination
 - **END Directive**: Found at line 680
   ```assembly
   END
   ```
-- **Status**: PASS âœ…
+- **Status**: PASS 
 
 ---
 
@@ -159,18 +159,18 @@ The code follows proper PIC-AS syntax patterns and should compile with MPLAB X v
 ### Memory Sections
 ```
 PSECT udata_acs (Access Bank - Fast Access)
-â”œâ”€â”€ temp1-temp6         (6 bytes)
-â”œâ”€â”€ loop_count          (1 byte)
-â””â”€â”€ delay_count         (1 byte)
+””” temp1-temp6         (6 bytes)
+””” loop_count          (1 byte)
+”””” delay_count         (1 byte)
 Total: 8 bytes
 
 PSECT udata_bank0 (Banked RAM)
-â”œâ”€â”€ board               (64 bytes)  - Chess board array
-â”œâ”€â”€ game_state          (12 bytes) - Turn, castling, etc.
-â”œâ”€â”€ move_list           (280 bytes) - Generated moves
-â”œâ”€â”€ UART buffers        (64 bytes)
-â”œâ”€â”€ working variables   (40 bytes)
-â””â”€â”€ AI variables        (3 bytes)
+””” board               (64 bytes)  - Chess board array
+””” game_state          (12 bytes) - Turn, castling, etc.
+””” move_list           (280 bytes) - Generated moves
+””” UART buffers        (64 bytes)
+””” working variables   (40 bytes)
+”””” AI variables        (3 bytes)
 Total: ~463 bytes
 
 Estimated Total RAM: ~471 bytes (31% of 1536 bytes available)
@@ -179,17 +179,17 @@ Estimated Total RAM: ~471 bytes (31% of 1536 bytes available)
 ### Code Sections
 ```
 PSECT resetVec (Reset Vector)
-â””â”€â”€ goto start          (Entry point)
+”””” goto start          (Entry point)
 
 PSECT code (Main Program)
-â”œâ”€â”€ start               (Initialization)
-â”œâ”€â”€ main_loop           (Game loop)
-â”œâ”€â”€ Hardware Functions  (8 functions)
-â”œâ”€â”€ Board Functions     (3 functions)
-â”œâ”€â”€ UART Functions      (7 functions)
-â”œâ”€â”€ Display Functions   (9 functions)
-â”œâ”€â”€ AI Functions        (3 functions)
-â””â”€â”€ Utility Functions   (3 functions)
+””” start               (Initialization)
+””” main_loop           (Game loop)
+””” Hardware Functions  (8 functions)
+””” Board Functions     (3 functions)
+””” UART Functions      (7 functions)
+””” Display Functions   (9 functions)
+””” AI Functions        (3 functions)
+”””” Utility Functions   (3 functions)
 Total: 33 functions
 ```
 
@@ -197,7 +197,7 @@ Total: 33 functions
 
 ## Potential Issues and Warnings
 
-### âš ï¸ Minor Concerns (May cause warnings, not errors)
+###  Minor Concerns (May cause warnings, not errors)
 
 1. **Simplified Move Generation**
    - Current implementation is placeholder
@@ -219,7 +219,7 @@ Total: 33 functions
    - Full implementation requires more stack/memory
    - **Impact**: AI will work but be limited
 
-### âœ… No Critical Issues Found
+###  No Critical Issues Found
 
 - No syntax errors expected
 - All PIC-AS patterns correct
@@ -233,18 +233,18 @@ Total: 33 functions
 
 | Requirement | Status | Implementation |
 |-------------|--------|----------------|
-| File extension `.S` | âœ… PASS | chess_engine_complete.S |
-| PROCESSOR directive | âœ… PASS | Line 14 |
-| Include `<xc.inc>` | âœ… PASS | Line 15 |
-| CONFIG directives | âœ… PASS | 39 configurations |
-| PSECT for sections | âœ… PASS | 4 sections defined |
-| DS for variables | âœ… PASS | 50 allocations |
-| BANKMASK for banking | âœ… PASS | 58 uses |
-| Lowercase instructions | âœ… PASS | 100% lowercase |
-| Labels with colons | âœ… PASS | 33 labels |
-| END directive | âœ… PASS | Line 680 |
+| File extension `.S` |  PASS | chess_engine_complete.S |
+| PROCESSOR directive |  PASS | Line 14 |
+| Include `<xc.inc>` |  PASS | Line 15 |
+| CONFIG directives |  PASS | 39 configurations |
+| PSECT for sections |  PASS | 4 sections defined |
+| DS for variables |  PASS | 50 allocations |
+| BANKMASK for banking |  PASS | 58 uses |
+| Lowercase instructions |  PASS | 100% lowercase |
+| Labels with colons |  PASS | 33 labels |
+| END directive |  PASS | Line 680 |
 
-**Overall Compliance**: 10/10 âœ…
+**Overall Compliance**: 10/10 
 
 ---
 
@@ -333,9 +333,9 @@ Build successful (0 errors, 0 warnings)
 
 ## Validation Summary
 
-**Syntax Validation**: âœ… COMPLETE
-**PIC-AS Compliance**: âœ… 100%
-**Build Readiness**: âœ… HIGH
+**Syntax Validation**:  COMPLETE
+**PIC-AS Compliance**:  100%
+**Build Readiness**:  HIGH
 **Estimated Success**: 85-90%
 
 ### What This Means

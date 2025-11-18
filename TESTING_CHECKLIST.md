@@ -26,17 +26,17 @@
   - [ ] King position cache updated correctly
 
 - [ ] `test_algebraic()` - Algebraic notation conversion
-  - [ ] e2 → square 12 (correct)
-  - [ ] e4 → square 28 (correct)
-  - [ ] a1 → square 0 (correct)
-  - [ ] h8 → square 63 (correct)
+  - [ ] e2 --> square 12 (correct)
+  - [ ] e4 --> square 28 (correct)
+  - [ ] a1 --> square 0 (correct)
+  - [ ] h8 --> square 63 (correct)
   - [ ] Reverse conversion works
   - [ ] Invalid notation rejected
 
 - [ ] `test_piece_to_char()` - Piece character conversion
-  - [ ] White pieces → Uppercase letters
-  - [ ] Black pieces → Lowercase letters
-  - [ ] Empty squares → Space
+  - [ ] White pieces --> Uppercase letters
+  - [ ] Black pieces --> Lowercase letters
+  - [ ] Empty squares --> Space
   - [ ] All piece types correct
 
 ### Move Generation Tests
@@ -83,9 +83,9 @@
 
 ### Perft Tests (Move Generation Validation)
 Run from starting position:
-- [ ] Perft(1) = 20 moves ✓
-- [ ] Perft(2) = 400 moves ✓
-- [ ] Perft(3) = 8,902 moves ✓
+- [ ] Perft(1) = 20 moves PASS
+- [ ] Perft(2) = 400 moves PASS
+- [ ] Perft(3) = 8,902 moves PASS
 
 Known positions:
 - [ ] Position 2 (Kiwipete): Perft(1) = 48 moves
@@ -242,8 +242,8 @@ Play same position with all levels:
 - [ ] Case insensitive (NEW vs new)
 
 ### Error Handling
-- [ ] Illegal moves show "Illegal move!"
-- [ ] Invalid commands show "Error!"
+- [ ] Illegal moves show "Illegal move."
+- [ ] Invalid commands show "Error."
 - [ ] Invalid square names rejected
 - [ ] Out-of-bounds moves rejected
 
@@ -366,22 +366,22 @@ After any code changes, re-run:
 
 | Test Category | Pass | Fail | Notes |
 |---------------|------|------|-------|
-| Board Representation | ☐ | ☐ | |
-| Move Generation | ☐ | ☐ | |
-| Perft Validation | ☐ | ☐ | |
-| Check Detection | ☐ | ☐ | |
-| Make/Unmake Moves | ☐ | ☐ | |
-| Complete Games | ☐ | ☐ | |
-| AI Level 1 | ☐ | ☐ | |
-| AI Level 2 | ☐ | ☐ | |
-| AI Level 3 | ☐ | ☐ | |
-| UART Communication | ☐ | ☐ | |
-| Command Parsing | ☐ | ☐ | |
-| Memory Usage | ☐ | ☐ | |
-| Performance | ☐ | ☐ | |
-| Hardware Tests | ☐ | ☐ | |
+| Board Representation | | | |
+| Move Generation | | | |
+| Perft Validation | | | |
+| Check Detection | | | |
+| Make/Unmake Moves | | | |
+| Complete Games | | | |
+| AI Level 1 | | | |
+| AI Level 2 | | | |
+| AI Level 3 | | | |
+| UART Communication | | | |
+| Command Parsing | | | |
+| Memory Usage | | | |
+| Performance | | | |
+| Hardware Tests | | | |
 
-### Overall Result: ☐ PASS  ☐ FAIL
+### Overall Result: PASS  FAIL
 
 ### Tester Signature: _______________________
 
@@ -405,13 +405,13 @@ def test_new_game():
     response = read_until_prompt()
     assert "8 |r|n|b|q|k|b|n|r|" in response
     assert "1 |R|N|B|Q|K|B|N|R|" in response
-    print("✓ New game test passed")
+    print("PASS New game test passed")
 
 def test_move():
     send_command("MOVE e2e4")
     response = read_until_prompt()
     assert "BLACK:" in response
-    print("✓ Move test passed")
+    print("PASS Move test passed")
 
 def test_scholars_mate():
     send_command("NEW 1")  # Use level 1 for predictable testing
@@ -425,7 +425,7 @@ def test_scholars_mate():
         send_command(white_move)
         response = read_until_prompt()
         # Verify expected patterns
-    print("✓ Scholar's Mate test passed")
+    print("PASS Scholar's Mate test passed")
 
 # Run all tests
 run_all_tests()
@@ -433,4 +433,4 @@ run_all_tests()
 
 ---
 
-**Testing is Critical! Do not skip steps!** ✅
+**Testing is Critical. Do not skip steps.** 

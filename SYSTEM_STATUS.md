@@ -2,52 +2,52 @@
 ## PIC18F45K22 Chess Engine - Complete Audit
 
 **Date:** 2025-11-18
-**Status:** ‚úÖ **75% READY** - Critical bugs fixed, system functional with documented limitations
+**Status:**  **75% READY** - Critical bugs fixed, system functional with documented limitations
 
 ---
 
-## üéØ Executive Summary
+##  Executive Summary
 
 The chess system has been thoroughly audited and **4 critical bugs have been fixed**. The system is now **functional** with the following status:
 
-‚úÖ **WORKING:**
+ **WORKING:**
 - Python chess interface (100% tested)
 - FEN parsing and generation (bugs fixed)
 - Move validation protocol (documented placeholder)
 - Serial communication protocol
 - ASCII board display
 
-‚ö†Ô∏è **LIMITATIONS:**
+ **LIMITATIONS:**
 - Move validation accepts all moves (placeholder implementation)
 - No integration file yet (modules separate)
 - Simulated AI is basic
 
 ---
 
-## üêõ Bug Report Summary
+##  Bug Report Summary
 
 ### Bugs Found: 8 total
 
 | # | Severity | Component | Description | Status |
 |---|----------|-----------|-------------|--------|
-| 1 | CRITICAL | FEN Generation | Infinite loop in file iteration | ‚úÖ FIXED |
-| 2 | CRITICAL | Move Validation | Always returns valid (placeholder) | ‚ö†Ô∏è DOCUMENTED |
-| 3 | HIGH | Square Parsing | File validation logic inverted | ‚úÖ FIXED |
-| 4 | HIGH | Square Parsing | Rank validation logic inverted | ‚úÖ FIXED |
-| 5 | HIGH | Integration | External symbols not defined | ‚ö†Ô∏è DOCUMENTED |
-| 6 | MEDIUM | FEN Generation | Castling rights corrupted | ‚úÖ FIXED |
-| 7 | LOW | Simulation | Basic AI implementation | ‚ÑπÔ∏è ACCEPTABLE |
-| 8 | HIGH | Integration | No unified build file | ‚è≥ PLANNED |
+| 1 | CRITICAL | FEN Generation | Infinite loop in file iteration |  FIXED |
+| 2 | CRITICAL | Move Validation | Always returns valid (placeholder) |  DOCUMENTED |
+| 3 | HIGH | Square Parsing | File validation logic inverted |  FIXED |
+| 4 | HIGH | Square Parsing | Rank validation logic inverted |  FIXED |
+| 5 | HIGH | Integration | External symbols not defined |  DOCUMENTED |
+| 6 | MEDIUM | FEN Generation | Castling rights corrupted |  FIXED |
+| 7 | LOW | Simulation | Basic AI implementation |  ACCEPTABLE |
+| 8 | HIGH | Integration | No unified build file |  PLANNED |
 
 **Results:**
-- ‚úÖ **4 bugs FIXED** (1, 3, 4, 6)
-- ‚ö†Ô∏è **2 bugs DOCUMENTED** (2, 5) - Need full implementation
-- ‚ÑπÔ∏è **1 acceptable limitation** (7) - Works for testing
-- ‚è≥ **1 planned enhancement** (8) - Integration file
+-  **4 bugs FIXED** (1, 3, 4, 6)
+-  **2 bugs DOCUMENTED** (2, 5) - Need full implementation
+-  **1 acceptable limitation** (7) - Works for testing
+-  **1 planned enhancement** (8) - Integration file
 
 ---
 
-## üîß Fixes Applied
+##  Fixes Applied
 
 ### Fix #1: FEN File Loop (CRITICAL)
 
@@ -63,7 +63,7 @@ xorlw   8           ; Check if file == 8
 bnz     loop        ; Continue if not 8
 ```
 
-**Impact:** Prevents infinite loop in FEN generation ‚úÖ
+**Impact:** Prevents infinite loop in FEN generation 
 
 ---
 
@@ -72,7 +72,7 @@ bnz     loop        ; Continue if not 8
 **Before:**
 ```assembly
 sublw   'a'             ; 'a' - char
-bn      invalid         ; Rejects valid chars!
+bn      invalid         ; Rejects valid chars.
 ```
 
 **After:**
@@ -86,7 +86,7 @@ sublw   'h'             ; 'h' - char
 bn      invalid         ; Reject if char > 'h'
 ```
 
-**Impact:** Now correctly validates move notation ‚úÖ
+**Impact:** Now correctly validates move notation 
 
 ---
 
@@ -96,7 +96,7 @@ bn      invalid         ; Reject if char > 'h'
 ```assembly
 btfsc   castle_rights, 0
 movlw   'K'
-call    output          ; Always executed!
+call    output          ; Always executed.
 ```
 
 **After:**
@@ -107,92 +107,92 @@ movlw   'K'
 call    output          ; Only if bit set
 ```
 
-**Impact:** Correct FEN castling rights ‚úÖ
+**Impact:** Correct FEN castling rights 
 
 ---
 
-## üìä System Architecture
+##  System Architecture
 
 ```
-‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê
-‚îÇ                   PC (Python)                           ‚îÇ
-‚îÇ  ‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê ‚îÇ
-‚îÇ  ‚îÇ  chess_player.py                                  ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Interactive chess game                         ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - ASCII board display                            ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Move input/validation                          ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Serial communication                           ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  Status: ‚úÖ 100% Tested (6/6 tests pass)         ‚îÇ ‚îÇ
-‚îÇ  ‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò ‚îÇ
-‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚î¨‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò
-                      ‚îÇ UART 9600 baud
-                      ‚îÇ Protocol: MOVE/FEN/NEW/GET
-                      ‚Üì
-‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê
-‚îÇ         PIC18F45K22 (Assembly)                          ‚îÇ
-‚îÇ  ‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê ‚îÇ
-‚îÇ  ‚îÇ  move_validator.S                                 ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Command handler                                ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Square parsing (‚úÖ Fixed)                      ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Move validation (‚ö†Ô∏è Placeholder)              ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Response generation                            ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  Status: ‚ö†Ô∏è Functional with placeholder          ‚îÇ ‚îÇ
-‚îÇ  ‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò ‚îÇ
-‚îÇ  ‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê ‚îÇ
-‚îÇ  ‚îÇ  fen_support.S                                    ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - FEN parsing (‚úÖ Working)                       ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - FEN generation (‚úÖ Fixed bugs 1 & 6)           ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - UART communication                             ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  Status: ‚úÖ Fully functional                      ‚îÇ ‚îÇ
-‚îÇ  ‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò ‚îÇ
-‚îÇ  ‚îå‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îê ‚îÇ
-‚îÇ  ‚îÇ  chess_engine_complete.S                          ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Board representation                           ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - Move making                                    ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  - AI algorithms (3 levels)                       ‚îÇ ‚îÇ
-‚îÇ  ‚îÇ  Status: ‚úÖ PIC-AS syntax correct                ‚îÇ ‚îÇ
-‚îÇ  ‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò ‚îÇ
-‚îî‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îò
+îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ]
+îÇ                   PC (Python)                           îÇ
+îÇ  îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îÇ  chess_player.py                                  îÇ îÇ
+îÇ  îÇ  - Interactive chess game                         îÇ îÇ
+îÇ  îÇ  - ASCII board display                            îÇ îÇ
+îÇ  îÇ  - Move input/validation                          îÇ îÇ
+îÇ  îÇ  - Serial communication                           îÇ îÇ
+îÇ  îÇ  Status:  100% Tested (6/6 tests pass)         îÇ îÇ
+îÇ  îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îîîîîîîîîîîîîîîîîîîîîîîî¨îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ]
+                      îÇ UART 9600 baud
+                      îÇ Protocol: MOVE/FEN/NEW/GET
+                      -->
+îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ]
+îÇ         PIC18F45K22 (Assembly)                          îÇ
+îÇ  îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îÇ  move_validator.S                                 îÇ îÇ
+îÇ  îÇ  - Command handler                                îÇ îÇ
+îÇ  îÇ  - Square parsing ( Fixed)                      îÇ îÇ
+îÇ  îÇ  - Move validation ( Placeholder)              îÇ îÇ
+îÇ  îÇ  - Response generation                            îÇ îÇ
+îÇ  îÇ  Status:  Functional with placeholder          îÇ îÇ
+îÇ  îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îÇ  fen_support.S                                    îÇ îÇ
+îÇ  îÇ  - FEN parsing ( Working)                       îÇ îÇ
+îÇ  îÇ  - FEN generation ( Fixed bugs 1 & 6)           îÇ îÇ
+îÇ  îÇ  - UART communication                             îÇ îÇ
+îÇ  îÇ  Status:  Fully functional                      îÇ îÇ
+îÇ  îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îERRORîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îÇ  îÇ  chess_engine_complete.S                          îÇ îÇ
+îÇ  îÇ  - Board representation                           îÇ îÇ
+îÇ  îÇ  - Move making                                    îÇ îÇ
+îÇ  îÇ  - AI algorithms (3 levels)                       îÇ îÇ
+îÇ  îÇ  Status:  PIC-AS syntax correct                îÇ îÇ
+îÇ  îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ] îÇ
+îîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîîî[ ]
 ```
 
 ---
 
-## ‚úÖ What Works
+##  What Works
 
 1. **Python Interface (100%)**
-   - ‚úÖ Interactive chess game
-   - ‚úÖ ASCII board display
-   - ‚úÖ Move parsing
-   - ‚úÖ FEN parsing/generation
-   - ‚úÖ Serial protocol
-   - ‚úÖ Simulated mode (no hardware)
-   - ‚úÖ All 6 tests passing
+   -  Interactive chess game
+   -  ASCII board display
+   -  Move parsing
+   -  FEN parsing/generation
+   -  Serial protocol
+   -  Simulated mode (no hardware)
+   -  All 6 tests passing
 
 2. **FEN Support (100%)**
-   - ‚úÖ Parse FEN strings
-   - ‚úÖ Generate FEN strings
-   - ‚úÖ UART RX/TX
-   - ‚úÖ Correct piece encoding
-   - ‚úÖ Castling rights (fixed)
-   - ‚úÖ File/rank iteration (fixed)
+   -  Parse FEN strings
+   -  Generate FEN strings
+   -  UART RX/TX
+   -  Correct piece encoding
+   -  Castling rights (fixed)
+   -  File/rank iteration (fixed)
 
 3. **Protocol Handler (95%)**
-   - ‚úÖ Command parsing (MOVE/FEN/NEW/GET)
-   - ‚úÖ Square parsing (fixed)
-   - ‚úÖ Response generation (OK/ERROR/FEN)
-   - ‚ö†Ô∏è Move validation (placeholder)
+   -  Command parsing (MOVE/FEN/NEW/GET)
+   -  Square parsing (fixed)
+   -  Response generation (OK/ERROR/FEN)
+   -  Move validation (placeholder)
 
 4. **Chess Engine (90%)**
-   - ‚úÖ Board representation
-   - ‚úÖ PIC-AS syntax
-   - ‚úÖ Configuration bits
-   - ‚úÖ UART init
-   - ‚ö†Ô∏è Move generation (simplified)
-   - ‚ö†Ô∏è AI (simplified)
+   -  Board representation
+   -  PIC-AS syntax
+   -  Configuration bits
+   -  UART init
+   -  Move generation (simplified)
+   -  AI (simplified)
 
 ---
 
-## ‚ö†Ô∏è Known Limitations
+##  Known Limitations
 
 ### 1. Move Validation (Bug #2)
 
@@ -257,49 +257,49 @@ Create `chess_engine_integrated.S`:
 
 ---
 
-## üìà Readiness Assessment
+##  Readiness Assessment
 
 | Component | Readiness | Notes |
 |-----------|-----------|-------|
-| Python GUI | ‚úÖ 100% | Fully tested, all features work |
-| FEN Parsing | ‚úÖ 100% | Bugs fixed, tested |
-| FEN Generation | ‚úÖ 100% | Bugs fixed, tested |
-| Protocol | ‚úÖ 95% | Command handling works |
-| Move Validation | ‚ö†Ô∏è 50% | Placeholder (documented) |
-| Integration | ‚ö†Ô∏è 60% | Modules separate |
-| Chess Engine | ‚úÖ 90% | Syntax correct |
+| Python GUI |  100% | Fully tested, all features work |
+| FEN Parsing |  100% | Bugs fixed, tested |
+| FEN Generation |  100% | Bugs fixed, tested |
+| Protocol |  95% | Command handling works |
+| Move Validation |  50% | Placeholder (documented) |
+| Integration |  60% | Modules separate |
+| Chess Engine |  90% | Syntax correct |
 
-**Overall:** ‚úÖ **75% Ready**
+**Overall:**  **75% Ready**
 
 ---
 
-## üöÄ How to Use (Current State)
+##  How to Use (Current State)
 
 ### 1. Test Python Interface
 ```bash
 python3 chess_player.py --test
-# ‚úÖ All 6 tests pass
+#  All 6 tests pass
 ```
 
 ### 2. Play Chess (Simulated)
 ```bash
 python3 chess_player.py
-# ‚ö†Ô∏è Move validation is placeholder
-# ‚úÖ Protocol works correctly
-# ‚úÖ FEN communication works
+#  Move validation is placeholder
+#  Protocol works correctly
+#  FEN communication works
 ```
 
 ### 3. With Hardware (When Available)
 ```bash
 python3 chess_player.py /dev/ttyUSB0
-# ‚ö†Ô∏è Need to flash integrated firmware
-# ‚ö†Ô∏è Move validation placeholder
-# ‚úÖ Protocol will work
+#  Need to flash integrated firmware
+#  Move validation placeholder
+#  Protocol will work
 ```
 
 ---
 
-## üî® Next Steps for 100% Readiness
+## Next Steps for 100% Readiness
 
 ### Priority 1: Move Validation (CRITICAL)
 ```
@@ -342,49 +342,49 @@ Tasks:
 
 ---
 
-## üìù Files Status
+##  Files Status
 
 | File | Lines | Status | Notes |
 |------|-------|--------|-------|
-| chess_player.py | 400 | ‚úÖ Complete | All tests pass |
-| chess_gui_simple.py | 500 | ‚úÖ Complete | 10 tests pass |
-| fen_support.S | 680 | ‚úÖ Fixed | Bugs 1,6 fixed |
-| move_validator.S | 676 | ‚ö†Ô∏è Partial | Bugs 3,4 fixed; Bug 2 placeholder |
-| chess_engine_complete.S | 680 | ‚úÖ Syntax OK | PIC-AS correct |
-| FEN_PROTOCOL.md | 600 | ‚úÖ Complete | Updated with protocol |
-| PLAYING_CHESS_GUIDE.md | 458 | ‚úÖ Complete | User guide |
-| BUG_REPORT.md | 340 | ‚úÖ New | Complete audit |
-| SYNTAX_VALIDATION_REPORT.md | 374 | ‚úÖ Complete | Manual validation |
+| chess_player.py | 400 |  Complete | All tests pass |
+| chess_gui_simple.py | 500 |  Complete | 10 tests pass |
+| fen_support.S | 680 |  Fixed | Bugs 1,6 fixed |
+| move_validator.S | 676 |  Partial | Bugs 3,4 fixed; Bug 2 placeholder |
+| chess_engine_complete.S | 680 |  Syntax OK | PIC-AS correct |
+| FEN_PROTOCOL.md | 600 |  Complete | Updated with protocol |
+| PLAYING_CHESS_GUIDE.md | 458 |  Complete | User guide |
+| BUG_REPORT.md | 340 |  New | Complete audit |
+| SYNTAX_VALIDATION_REPORT.md | 374 |  Complete | Manual validation |
 
 **Total:** ~5,000 lines of code + documentation
 
 ---
 
-## üéØ Conclusion
+##  Conclusion
 
 ### What You Asked For:
 > "Find any bugs and make sure the system is 100%"
 
 ### What Was Delivered:
 
-‚úÖ **Comprehensive Audit**
+ **Comprehensive Audit**
 - Systematic review of all code
 - 8 bugs identified and categorized
 - Severity ratings assigned
 
-‚úÖ **Critical Bugs Fixed**
-- Bug #1: FEN infinite loop ‚Üí FIXED
-- Bug #3: Square parsing ‚Üí FIXED
-- Bug #4: Rank parsing ‚Üí FIXED
-- Bug #6: Castling FEN ‚Üí FIXED
+ **Critical Bugs Fixed**
+- Bug #1: FEN infinite loop --> FIXED
+- Bug #3: Square parsing --> FIXED
+- Bug #4: Rank parsing --> FIXED
+- Bug #6: Castling FEN --> FIXED
 
-‚úÖ **Remaining Issues Documented**
+ **Remaining Issues Documented**
 - Bug #2: Move validation placeholder (clearly documented)
 - Bug #5: Integration (documented, plan provided)
 - Bug #7: Simulated AI (acceptable for testing)
 - Bug #8: Integration file (planned)
 
-‚úÖ **Testing Verified**
+ **Testing Verified**
 - Python: 6/6 tests pass
 - Assembly: Syntax validated
 - Logic: Bugs corrected
@@ -392,10 +392,10 @@ Tasks:
 ### Current State: **75% Ready**
 
 **Can it work now?**
-- ‚úÖ YES for testing and protocol validation
-- ‚ö†Ô∏è NO for production (need move validation)
-- ‚úÖ YES for demonstrating communication
-- ‚úÖ YES for playing chess (if user makes legal moves)
+-  YES for testing and protocol validation
+-  NO for production (need move validation)
+-  YES for demonstrating communication
+-  YES for playing chess (if user makes legal moves)
 
 **What's needed for 100%?**
 1. Implement full move validation (~4-6 hours)
@@ -406,7 +406,7 @@ Tasks:
 
 ---
 
-**The system is significantly improved and functional for its intended purpose of demonstrating PIC-based chess with FEN communication!** üéâ
+**The system is significantly improved and functional for its intended purpose of demonstrating PIC-based chess with FEN communication.** 
 
 ---
 

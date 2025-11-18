@@ -8,14 +8,14 @@ This project successfully implements a complete chess engine in pure assembly la
 
 ## Achievement Highlights
 
-### âœ… Complete Implementation
+###  Complete Implementation
 - **All chess rules**: Piece movements, special moves, check/checkmate detection
 - **Three AI levels**: Random (easy), Evaluation (medium), Minimax (hard)
 - **Serial interface**: 9600 baud UART for human interaction
 - **Robust design**: No known bugs, handles edge cases
 - **Well documented**: 5 comprehensive documentation files
 
-### âœ… Technical Accomplishments
+###  Technical Accomplishments
 - **Memory efficient**: Uses 91-97% of available RAM efficiently
 - **Performance**: AI responds within specified time limits
 - **Reliability**: Stable operation, no crashes
@@ -162,9 +162,9 @@ Allocation:
 ### Move Generation Validation (Perft)
 ```
 Starting position:
-- Perft(1) = 20 moves âœ“
-- Perft(2) = 400 moves âœ“
-- Perft(3) = 8,902 moves âœ“
+- Perft(1) = 20 moves PASS
+- Perft(2) = 400 moves PASS
+- Perft(3) = 8,902 moves PASS
 ```
 
 ---
@@ -172,39 +172,39 @@ Starting position:
 ## Systems Engineering Approach
 
 ### Requirements Phase
-1. âœ… Analyzed PIC18F45K22 constraints thoroughly
-2. âœ… Defined functional requirements (FR-001 to FR-009)
-3. âœ… Defined non-functional requirements (NFR-001 to NFR-007)
-4. âœ… Identified critical constraints
+1.  Analyzed PIC18F45K22 constraints thoroughly
+2.  Defined functional requirements (FR-001 to FR-009)
+3.  Defined non-functional requirements (NFR-001 to NFR-007)
+4.  Identified critical constraints
 
 ### Design Phase
-1. âœ… Created high-level architecture
-2. âœ… Designed data structures (memory-efficient)
-3. âœ… Planned I/O interface (UART protocol)
-4. âœ… Selected algorithms (appropriate for constraints)
-5. âœ… Created memory map
-6. âœ… Defined module interfaces
+1.  Created high-level architecture
+2.  Designed data structures (memory-efficient)
+3.  Planned I/O interface (UART protocol)
+4.  Selected algorithms (appropriate for constraints)
+5.  Created memory map
+6.  Defined module interfaces
 
 ### Implementation Phase
-1. âœ… Modular code organization
-2. âœ… Bottom-up development (primitives first)
-3. âœ… Consistent naming conventions
-4. âœ… Comprehensive commenting
-5. âœ… Incremental integration
+1.  Modular code organization
+2.  Bottom-up development (primitives first)
+3.  Consistent naming conventions
+4.  Comprehensive commenting
+5.  Incremental integration
 
 ### Testing Phase
-1. âœ… Unit test framework created
-2. âœ… Perft validation implemented
-3. âœ… Integration tests defined
-4. âœ… Test checklist created
-5. âœ… Edge cases documented
+1.  Unit test framework created
+2.  Perft validation implemented
+3.  Integration tests defined
+4.  Test checklist created
+5.  Edge cases documented
 
 ### Documentation Phase
-1. âœ… Design document (DESIGN_DOCUMENT.md)
-2. âœ… User manual (USER_MANUAL.md)
-3. âœ… Build guide (BUILD_GUIDE.md)
-4. âœ… README (README.md)
-5. âœ… Testing checklist (TESTING_CHECKLIST.md)
+1.  Design document (DESIGN_DOCUMENT.md)
+2.  User manual (USER_MANUAL.md)
+3.  Build guide (BUILD_GUIDE.md)
+4.  README (README.md)
+5.  Testing checklist (TESTING_CHECKLIST.md)
 
 ---
 
@@ -291,35 +291,35 @@ Starting position:
 
 ```
 Chess-in-assembly/
-â”œâ”€â”€ Source Code (Assembly)
-â”‚   â”œâ”€â”€ main.asm              # Main program entry (1,100 lines)
-â”‚   â”œâ”€â”€ board.asm             # Board representation (350 lines)
-â”‚   â”œâ”€â”€ uart.asm              # Serial I/O (450 lines)
-â”‚   â”œâ”€â”€ movegen.asm           # Move generation (1,200 lines)
-â”‚   â”œâ”€â”€ makemove.asm          # Make/unmake moves (450 lines)
-â”‚   â”œâ”€â”€ check.asm             # Check detection (550 lines)
-â”‚   â”œâ”€â”€ evaluate.asm          # Position evaluation (250 lines)
-â”‚   â”œâ”€â”€ ai_level1.asm         # Random AI (150 lines)
-â”‚   â”œâ”€â”€ ai_level2.asm         # Evaluation AI (200 lines)
-â”‚   â”œâ”€â”€ ai_level3.asm         # Minimax AI (300 lines)
-â”‚   â”œâ”€â”€ display.asm           # Board display (400 lines)
-â”‚   â””â”€â”€ parser.asm            # Command parsing (400 lines)
-â”‚
-â”œâ”€â”€ Include Files
-â”‚   â”œâ”€â”€ config.inc            # Configuration bits
-â”‚   â”œâ”€â”€ definitions.inc       # Constants and macros
-â”‚   â””â”€â”€ memory.inc            # Memory map
-â”‚
-â”œâ”€â”€ Documentation
-â”‚   â”œâ”€â”€ README.md             # Project overview
-â”‚   â”œâ”€â”€ USER_MANUAL.md        # End-user guide
-â”‚   â”œâ”€â”€ BUILD_GUIDE.md        # Developer guide
-â”‚   â”œâ”€â”€ DESIGN_DOCUMENT.md    # Systems engineering design
-â”‚   â”œâ”€â”€ TESTING_CHECKLIST.md  # Comprehensive test plan
-â”‚   â””â”€â”€ PROJECT_SUMMARY.md    # This file
-â”‚
-â””â”€â”€ Tests
-    â””â”€â”€ test_board.asm        # Unit tests
+””” Source Code (Assembly)
+”‚   ””” main.asm              # Main program entry (1,100 lines)
+”‚   ””” board.asm             # Board representation (350 lines)
+”‚   ””” uart.asm              # Serial I/O (450 lines)
+”‚   ””” movegen.asm           # Move generation (1,200 lines)
+”‚   ””” makemove.asm          # Make/unmake moves (450 lines)
+”‚   ””” check.asm             # Check detection (550 lines)
+”‚   ””” evaluate.asm          # Position evaluation (250 lines)
+”‚   ””” ai_level1.asm         # Random AI (150 lines)
+”‚   ””” ai_level2.asm         # Evaluation AI (200 lines)
+”‚   ””” ai_level3.asm         # Minimax AI (300 lines)
+”‚   ””” display.asm           # Board display (400 lines)
+”‚   ”””” parser.asm            # Command parsing (400 lines)
+”‚
+””” Include Files
+”‚   ””” config.inc            # Configuration bits
+”‚   ””” definitions.inc       # Constants and macros
+”‚   ”””” memory.inc            # Memory map
+”‚
+””” Documentation
+”‚   ””” README.md             # Project overview
+”‚   ””” USER_MANUAL.md        # End-user guide
+”‚   ””” BUILD_GUIDE.md        # Developer guide
+”‚   ””” DESIGN_DOCUMENT.md    # Systems engineering design
+”‚   ””” TESTING_CHECKLIST.md  # Comprehensive test plan
+”‚   ”””” PROJECT_SUMMARY.md    # This file
+”‚
+”””” Tests
+    ”””” test_board.asm        # Unit tests
 
 Total Lines of Code: ~5,500 lines
 Total Documentation: ~4,000 lines
@@ -349,24 +349,24 @@ Total Documentation: ~4,000 lines
 ## Success Criteria Met
 
 ### Functional Requirements
-- âœ… FR-001: Complete chess rules implemented
-- âœ… FR-002: Castling supported
-- âœ… FR-003: En passant supported
-- âœ… FR-004: Pawn promotion supported
-- âœ… FR-005: Check/checkmate/stalemate detected
-- âœ… FR-006: Three AI levels implemented
-- âœ… FR-007: Serial interface for human moves
-- âœ… FR-008: Board display via serial
-- âœ… FR-009: Move validation implemented
+-  FR-001: Complete chess rules implemented
+-  FR-002: Castling supported
+-  FR-003: En passant supported
+-  FR-004: Pawn promotion supported
+-  FR-005: Check/checkmate/stalemate detected
+-  FR-006: Three AI levels implemented
+-  FR-007: Serial interface for human moves
+-  FR-008: Board display via serial
+-  FR-009: Move validation implemented
 
 ### Non-Functional Requirements
-- âœ… NFR-001: Level 1 < 1 second âœ“
-- âœ… NFR-002: Level 2 < 5 seconds âœ“
-- âœ… NFR-003: Level 3 < 30 seconds âœ“
-- âœ… NFR-004: Fits in 32KB âœ“ (28-30 KB)
-- âœ… NFR-005: Operates in 1536 bytes RAM âœ“ (1400-1500 bytes)
-- âœ… NFR-006: Reliable operation âœ“
-- âœ… NFR-007: Well-commented code âœ“
+-  NFR-001: Level 1 < 1 second PASS
+-  NFR-002: Level 2 < 5 seconds PASS
+-  NFR-003: Level 3 < 30 seconds PASS
+-  NFR-004: Fits in 32KB PASS (28-30 KB)
+-  NFR-005: Operates in 1536 bytes RAM PASS (1400-1500 bytes)
+-  NFR-006: Reliable operation PASS
+-  NFR-007: Well-commented code PASS
 
 ---
 
@@ -399,9 +399,9 @@ Total Documentation: ~4,000 lines
 
 This project demonstrates that sophisticated applications can run on severely resource-constrained embedded systems with careful engineering. The chess engine successfully balances functionality, performance, and resource usage, proving that 8-bit microcontrollers remain viable for complex logic tasks.
 
-The comprehensive systems engineering approachâ€”from requirements analysis through testingâ€”ensures a robust, maintainable, and well-documented implementation suitable for both educational use and practical deployment.
+The comprehensive systems engineering approach”from requirements analysis through testing”ensures a robust, maintainable, and well-documented implementation suitable for both educational use and practical deployment.
 
-**Project Status: COMPLETE** âœ…
+**Project Status: COMPLETE** 
 
 ---
 
@@ -429,4 +429,4 @@ For questions, issues, or enhancements:
 
 ---
 
-*"Chess on a chip - proving that great things come in small packages!"* â™Ÿï¸
+*"Chess on a chip - proving that great things come in small packages."* 

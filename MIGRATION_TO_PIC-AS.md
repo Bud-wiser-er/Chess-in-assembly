@@ -1,8 +1,8 @@
 # Migration Guide: MPASM to PIC-AS
 
-## ⚠️ IMPORTANT NOTICE
+##  IMPORTANT NOTICE
 
-**MPASM has been deprecated by Microchip!**
+**MPASM has been deprecated by Microchip.**
 
 Starting with **MPLAB X IDE v5.40 and later**, the MPASM assembler is **NO LONGER INCLUDED**. You must use the **PIC-AS assembler** (part of MPLAB XC8 compiler suite).
 
@@ -48,7 +48,7 @@ Starting with **MPLAB X IDE v5.40 and later**, the MPASM assembler is **NO LONGE
 main.asm
 
 ; New PIC-AS
-main.S    (capital S!)
+main.S    (capital S.)
 ```
 
 ### 2. Processor Declaration
@@ -174,15 +174,15 @@ PSECT udata_bank0
 
 3. **Verify Installation**
    - Open MPLAB X IDE
-   - Tools → Options → Embedded
+   - Tools --> Options --> Embedded
    - Check that XC8 is listed
 
 ### Step 2: Create New Project
-1. **File → New Project**
-2. **Microchip Embedded → Standalone Project**
+1. **File --> New Project**
+2. **Microchip Embedded --> Standalone Project**
 3. **Device**: PIC18F45K22
 4. **Tool**: PICkit 3/4 or Simulator
-5. **Compiler**: XC8 (select XC8 Compiler, not MPASM!)
+5. **Compiler**: XC8 (select XC8 Compiler, not MPASM.)
 6. **Project Name**: Chess-Engine-PIC18F45K22
 
 ### Step 3: Convert Source Files
@@ -193,16 +193,16 @@ PSECT udata_bank0
 
 #### Option B: Convert Manually
 For each `.asm` file:
-1. Rename `filename.asm` → `filename.S`
-2. Change `LIST P=18F45K22` → `PROCESSOR 18F45K22`
-3. Change `#include <p18f45k22.inc>` → `#include <xc.inc>`
+1. Rename `filename.asm` --> `filename.S`
+2. Change `LIST P=18F45K22` --> `PROCESSOR 18F45K22`
+3. Change `#include <p18f45k22.inc>` --> `#include <xc.inc>`
 4. Convert `ORG` to `PSECT`
 5. Convert `CBLOCK/ENDC` to `PSECT` + `DS`
 6. Add `BANKMASK()` where needed
 7. Review and test
 
 ### Step 4: Project Configuration
-1. **Right-click project → Properties**
+1. **Right-click project --> Properties**
 2. **pic-as Global Options**:
    - Preprocessor macros: (none needed)
    - Additional options: (leave default)
@@ -259,23 +259,23 @@ Error: Undefined symbol: PORTA
 
 ## Status of Chess Engine Conversion
 
-### ✅ Converted Files
+###  Converted Files
 - `main.S` - Main program (PIC-AS syntax)
 - `config_pic-as.inc` - Configuration bits
 
-### 🚧 Files Needing Conversion
+### � Files Needing Conversion
 The following files are in MPASM syntax and need conversion:
-- `board.asm` → `board.S`
-- `uart.asm` → `uart.S`
-- `movegen.asm` → `movegen.S`
-- `makemove.asm` → `makemove.S`
-- `check.asm` → `check.S`
-- `evaluate.asm` → `evaluate.S`
-- `ai_level1.asm` → `ai_level1.S`
-- `ai_level2.asm` → `ai_level2.S`
-- `ai_level3.asm` → `ai_level3.S`
-- `display.asm` → `display.S`
-- `parser.asm` → `parser.S`
+- `board.asm` --> `board.S`
+- `uart.asm` --> `uart.S`
+- `movegen.asm` --> `movegen.S`
+- `makemove.asm` --> `makemove.S`
+- `check.asm` --> `check.S`
+- `evaluate.asm` --> `evaluate.S`
+- `ai_level1.asm` --> `ai_level1.S`
+- `ai_level2.asm` --> `ai_level2.S`
+- `ai_level3.asm` --> `ai_level3.S`
+- `display.asm` --> `display.S`
+- `parser.asm` --> `parser.S`
 
 ### Conversion Approach
 
@@ -301,7 +301,7 @@ The following files are in MPASM syntax and need conversion:
 
 ### Online Resources
 - **Microchip Developer Help**: [https://microchipdeveloper.com](https://microchipdeveloper.com)
-- **MPLAB X IDE User's Guide**: Embedded → Assembler Topics
+- **MPLAB X IDE User's Guide**: Embedded --> Assembler Topics
 - **PIC18 Device Include Files**: Located in XC8 installation directory
   - `C:\Program Files\Microchip\xc8\v2.xx\pic\include\proc\`
 
@@ -318,12 +318,12 @@ Use this checklist when converting the chess engine:
 ### Preparation
 - [ ] MPLAB X IDE v5.40+ installed
 - [ ] MPLAB XC8 compiler installed
-- [ ] Verified pic-as is available (Tools → Options)
+- [ ] Verified pic-as is available (Tools --> Options)
 - [ ] Backed up original MPASM `.asm` files
 
 ### Conversion
 - [ ] Created new project with XC8 toolchain
-- [ ] Renamed files: `.asm` → `.S`
+- [ ] Renamed files: `.asm` --> `.S`
 - [ ] Updated processor declaration
 - [ ] Changed include to `<xc.inc>`
 - [ ] Converted ORG to PSECT
@@ -405,7 +405,7 @@ The chess engine code is provided in **both formats** for educational purposes:
 - `.asm` files: **Legacy MPASM** (for reference only, won't build on modern MPLAB X)
 - `.S` files: **Modern PIC-AS** (use these for actual development)
 
-**Start with `main.S` as your template for converting the remaining modules!**
+**Start with `main.S` as your template for converting the remaining modules.**
 
 ---
 
@@ -414,4 +414,4 @@ The chess engine code is provided in **both formats** for educational purposes:
 - Original MPASM code provided for reference
 - PIC-AS conversion in progress
 
-**Good luck with your conversion!** 🛠️
+**Good luck with your conversion.** �WARNINGWARNINGWARNING[WAIT]

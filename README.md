@@ -2,21 +2,21 @@
 
 A complete chess engine implementation in assembly language for the PIC18F45K22 microcontroller.
 
-## âš ï¸ IMPORTANT: MPASM vs PIC-AS
+##  IMPORTANT: MPASM vs PIC-AS
 
-**MPASM has been deprecated by Microchip!** Starting with MPLAB X v5.40, you must use **PIC-AS** (part of MPLAB XC8).
+**MPASM has been deprecated by Microchip.** Starting with MPLAB X v5.40, you must use **PIC-AS** (part of MPLAB XC8).
 
-### ğŸš€ QUICK START - Use This File:
-**`chess_engine_complete.S`** - Complete single-file PIC-AS version (ready to build!)
+###  QUICK START - Use This File:
+**`chess_engine_complete.S`** - Complete single-file PIC-AS version (ready to build.)
 
 See **[QUICK_START_PIC-AS.md](QUICK_START_PIC-AS.md)** for step-by-step build instructions.
 
 ### File Versions:
-- âœ… **`chess_engine_complete.S`** - All-in-one PIC-AS version (**USE THIS!**)
-- ğŸ“ **`.S` files** - Individual module templates (PIC-AS syntax)
-- ğŸ“š **`.asm` files** - Legacy MPASM (reference only, won't build on modern MPLAB X)
+-  **`chess_engine_complete.S`** - All-in-one PIC-AS version (**USE THIS.**)
+-  **`.S` files** - Individual module templates (PIC-AS syntax)
+-  **`.asm` files** - Legacy MPASM (reference only, won't build on modern MPLAB X)
 
-**ğŸ‘‰ See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for complete syntax conversion guide!**
+** See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for complete syntax conversion guide.**
 
 ## Project Overview
 
@@ -29,15 +29,15 @@ This project implements a fully functional chess engine on an 8-bit microcontrol
 ## Features
 
 ### Complete Chess Rules Implementation
-- âœ… All piece movements (pawns, knights, bishops, rooks, queens, kings)
-- âœ… Special moves:
+-  All piece movements (pawns, knights, bishops, rooks, queens, kings)
+-  Special moves:
   - Castling (kingside and queenside)
   - En passant captures
   - Pawn promotion (to Q, R, B, or N)
-- âœ… Check detection
-- âœ… Checkmate detection
-- âœ… Stalemate detection
-- âœ… Legal move validation
+-  Check detection
+-  Checkmate detection
+-  Stalemate detection
+-  Legal move validation
 
 ### Three AI Difficulty Levels
 1. **Level 1 (Easy)**: Random legal move selection
@@ -112,7 +112,7 @@ UART |18 23| RD3  <- RC6 (RX)
 - **PICkit 3/4** or compatible programmer
 - **Terminal Emulator** (PuTTY, TeraTerm, or Arduino Serial Monitor)
 
-âš ï¸ **Important**: MPASM is deprecated! You must use **PIC-AS** (part of XC8) for MPLAB X v5.40+.
+ **Important**: MPASM is deprecated. You must use **PIC-AS** (part of XC8) for MPLAB X v5.40+.
 
 ### Building the Project
 
@@ -123,13 +123,13 @@ UART |18 23| RD3  <- RC6 (RX)
    - Download MPLAB XC8 Compiler from [Microchip](https://www.microchip.com/mplab/compilers)
 
 2. **Create New Project**:
-   - Select "Microchip Embedded" â†’ "Standalone Project"
+   - Select "Microchip Embedded" --> "Standalone Project"
    - Device: PIC18F45K22
    - Tool: PICkit 3/4 (or simulator)
-   - Compiler: **XC8** (not MPASM!)
+   - Compiler: **XC8** (not MPASM.)
 
 3. **Add Source Files**:
-   - Add `main.S` (capital S!) as the main source file
+   - Add `main.S` (capital S.) as the main source file
    - PIC-AS uses `.S` extension, not `.asm`
    - See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for syntax differences
 
@@ -261,41 +261,41 @@ BLACK: e7-e5
 
 ```
 Chess-in-assembly/
-â”œâ”€â”€ Modern PIC-AS Files (.S) - Use These!
-â”‚   â”œâ”€â”€ main.S                   # Main program (PIC-AS syntax)
-â”‚   â”œâ”€â”€ config_pic-as.inc        # Configuration bits (PIC-AS)
-â”‚   â””â”€â”€ [Other .S files to be converted]
-â”‚
-â”œâ”€â”€ Legacy MPASM Files (.asm) - Reference Only
-â”‚   â”œâ”€â”€ main.asm                 # Main program (MPASM - deprecated)
-â”‚   â”œâ”€â”€ config.inc               # Configuration bits
-â”‚   â”œâ”€â”€ definitions.inc          # Constants and macros
-â”‚   â”œâ”€â”€ memory.inc               # Memory map
-â”‚   â”œâ”€â”€ board.asm                # Board representation
-â”‚   â”œâ”€â”€ uart.asm                 # Serial communication
-â”‚   â”œâ”€â”€ movegen.asm              # Move generation engine
-â”‚   â”œâ”€â”€ makemove.asm             # Make/unmake moves
-â”‚   â”œâ”€â”€ check.asm                # Check/checkmate detection
-â”‚   â”œâ”€â”€ evaluate.asm             # Position evaluation
-â”‚   â”œâ”€â”€ ai_level1.asm            # Level 1 AI (random)
-â”‚   â”œâ”€â”€ ai_level2.asm            # Level 2 AI (evaluation)
-â”‚   â”œâ”€â”€ ai_level3.asm            # Level 3 AI (minimax)
-â”‚   â”œâ”€â”€ display.asm              # Board display
-â”‚   â””â”€â”€ parser.asm               # Command parser
-â”‚
-â”œâ”€â”€ Documentation
-â”‚   â”œâ”€â”€ README.md                # This file
-â”‚   â”œâ”€â”€ MIGRATION_TO_PIC-AS.md   # â­ Conversion guide
-â”‚   â”œâ”€â”€ USER_MANUAL.md           # End-user guide
-â”‚   â”œâ”€â”€ BUILD_GUIDE.md           # Developer guide
-â”‚   â”œâ”€â”€ DESIGN_DOCUMENT.md       # Systems design
-â”‚   â”œâ”€â”€ TESTING_CHECKLIST.md     # Test procedures
-â”‚   â””â”€â”€ PROJECT_SUMMARY.md       # Executive summary
-â”‚
-â””â”€â”€ Tests
-    â””â”€â”€ test_board.asm           # Unit tests
+””” Modern PIC-AS Files (.S) - Use These.
+”‚   ””” main.S                   # Main program (PIC-AS syntax)
+”‚   ””” config_pic-as.inc        # Configuration bits (PIC-AS)
+”‚   ”””” [Other .S files to be converted]
+”‚
+””” Legacy MPASM Files (.asm) - Reference Only
+”‚   ””” main.asm                 # Main program (MPASM - deprecated)
+”‚   ””” config.inc               # Configuration bits
+”‚   ””” definitions.inc          # Constants and macros
+”‚   ””” memory.inc               # Memory map
+”‚   ””” board.asm                # Board representation
+”‚   ””” uart.asm                 # Serial communication
+”‚   ””” movegen.asm              # Move generation engine
+”‚   ””” makemove.asm             # Make/unmake moves
+”‚   ””” check.asm                # Check/checkmate detection
+”‚   ””” evaluate.asm             # Position evaluation
+”‚   ””” ai_level1.asm            # Level 1 AI (random)
+”‚   ””” ai_level2.asm            # Level 2 AI (evaluation)
+”‚   ””” ai_level3.asm            # Level 3 AI (minimax)
+”‚   ””” display.asm              # Board display
+”‚   ”””” parser.asm               # Command parser
+”‚
+””” Documentation
+”‚   ””” README.md                # This file
+”‚   ””” MIGRATION_TO_PIC-AS.md   #  Conversion guide
+”‚   ””” USER_MANUAL.md           # End-user guide
+”‚   ””” BUILD_GUIDE.md           # Developer guide
+”‚   ””” DESIGN_DOCUMENT.md       # Systems design
+”‚   ””” TESTING_CHECKLIST.md     # Test procedures
+”‚   ”””” PROJECT_SUMMARY.md       # Executive summary
+”‚
+”””” Tests
+    ”””” test_board.asm           # Unit tests
 
-âš ï¸ Note: .asm files are MPASM (deprecated). Use .S files for PIC-AS!
+ Note: .asm files are MPASM (deprecated). Use .S files for PIC-AS.
 See MIGRATION_TO_PIC-AS.md for conversion details.
 ```
 
@@ -359,9 +359,9 @@ tests/perft.asm
 ### Perft Results
 Validates move generation correctness:
 ```
-Perft(1) from starting position: 20 moves âœ“
-Perft(2) from starting position: 400 moves âœ“
-Perft(3) from starting position: 8,902 moves âœ“
+Perft(1) from starting position: 20 moves PASS
+Perft(2) from starting position: 400 moves PASS
+Perft(3) from starting position: 8,902 moves PASS
 ```
 
 ### Integration Tests
@@ -422,7 +422,7 @@ This project is provided as-is for educational purposes. Feel free to:
 
 ## License
 
-This project is released into the public domain. Use it however you like!
+This project is released into the public domain. Use it however you like.
 
 ## References
 
@@ -438,4 +438,4 @@ Created: 2025
 
 ---
 
-**Happy Chess Playing! â™Ÿï¸**
+**End of documentation. **

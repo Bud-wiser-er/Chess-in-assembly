@@ -39,15 +39,15 @@
 
 ```
 USB-Serial Adapter          PIC18F45K22
-‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ          ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
-        TX        ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ> RC6 (Pin 17) RX
-        RX        <‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ RC7 (Pin 18) TX
-       GND        ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ> GND
-       VCC        ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ> VDD (3.3V or 5V)
+îîîîîîîîîîîîîîîîî          îîîîîîîîîîîî
+        TX        îîîîîîîî> RC6 (Pin 17) RX
+        RX        <îîîîîîîî RC7 (Pin 18) TX
+       GND        îîîîîîîî> GND
+       VCC        îîîîîîîî> VDD (3.3V or 5V)
 ```
 
 ### Important Notes
-- **NEVER** swap RX and TX! TX connects to RX, RX connects to TX
+- **NEVER** swap RX and TX. TX connects to RX, RX connects to TX
 - Ensure voltage levels match (3.3V or 5V)
 - Common ground is essential
 - Use short, quality jumper wires
@@ -56,12 +56,12 @@ USB-Serial Adapter          PIC18F45K22
 You can add an LED to indicate when the AI is thinking:
 ```
 PIC18F45K22          LED
-‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ          ‚îÄ‚îÄ‚îÄ
-    RA0      ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ> Anode (longer leg)
+îîîîîîîîîîîî          îîî
+    RA0      îîîîîî> Anode (longer leg)
                          |
                       Resistor (220Œ©-1kŒ©)
                          |
-    GND      ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ> Cathode (shorter leg)
+    GND      îîîîîî> Cathode (shorter leg)
 ```
 
 ---
@@ -81,8 +81,8 @@ PIC18F45K22          LED
    - Click "Open"
 
 3. **Configure Settings**:
-   - Terminal ‚Üí Local echo: Force on (optional)
-   - Terminal ‚Üí Local line editing: Force on (optional)
+   - Terminal --> Local echo: Force on (optional)
+   - Terminal --> Local line editing: Force on (optional)
 
 ### macOS
 
@@ -223,21 +223,21 @@ MOVE e5d6    # Capture en passant
 
 **Checkmate**:
 ```
-Checkmate! White wins.
+Checkmate. White wins.
 ```
 or
 ```
-Checkmate! Black wins.
+Checkmate. Black wins.
 ```
 
 **Stalemate**:
 ```
-Stalemate - Draw!
+Stalemate - Draw.
 ```
 
 **Check**:
 ```
-Check!
+Check.
 ```
 You must move your king to safety or block the attack.
 
@@ -278,8 +278,8 @@ MOVE e7e8Q      # Pawn promotes to Queen
 
 **Common Errors**:
 ```
-Illegal move!   # Move not legal in current position
-Error!          # Invalid command format
+Illegal move.   # Move not legal in current position
+Error.          # Invalid command format
 ```
 
 ### SHOW - Display Board
@@ -361,7 +361,7 @@ LEVEL 3    # Switch to hard mode
 
 **How**:
 - Next move only: capture diagonally to square pawn passed over
-- Example: If enemy pawn goes e7‚Üíe5, and you have pawn on d5, you can play `MOVE d5e6`
+- Example: If enemy pawn goes e7-->e5, and you have pawn on d5, you can play `MOVE d5e6`
 
 #### Pawn Promotion
 **When**:
@@ -485,7 +485,7 @@ LEVEL 3    # Switch to hard mode
 
 ### Problem: Garbled Characters
 
-**Symptoms**: `$#@!%^&*` instead of text
+**Symptoms**: `$#@.%^&*` instead of text
 
 **Causes**:
 - Wrong baud rate
@@ -500,7 +500,7 @@ LEVEL 3    # Switch to hard mode
 
 ---
 
-### Problem: "Illegal move!" Error
+### Problem: "Illegal move." Error
 
 **Why**:
 - Move doesn't follow chess rules
@@ -555,7 +555,7 @@ Not directly. This version is AI vs Human only. Both players would need to take 
 No, undo is not currently implemented. Start a new game with `NEW <level>` if needed.
 
 ### What happens if I make an illegal move?
-The engine will respond with "Illegal move!" and wait for a legal move.
+The engine will respond with "Illegal move." and wait for a legal move.
 
 ### Can I play as Black?
 No, you always play as White (moves first), AI plays as Black.
@@ -575,10 +575,10 @@ The engine detects stalemate. It does NOT automatically detect:
 These require manual agreement or starting a new game.
 
 ### Can I change the AI mid-game?
-Yes! Use `LEVEL <n>` to switch difficulty without resetting the board.
+Yes. Use `LEVEL <n>` to switch difficulty without resetting the board.
 
 ### Why is Level 3 so slow?
-Level 3 evaluates thousands of positions (up to 6,000). On an 8-bit microcontroller running at 16 MHz, this takes time!
+Level 3 evaluates thousands of positions (up to 6,000). On an 8-bit microcontroller running at 16 MHz, this takes time.
 
 ### Can the AI play against itself?
 Not in the current version. You must make moves for White.
@@ -696,7 +696,7 @@ BLACK: d7-d6
 
 ---
 
-**Enjoy playing chess on your PIC18F45K22! ‚ôüÔ∏è**
+**End of manual. **
 
 ---
 

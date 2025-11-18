@@ -76,7 +76,7 @@ class ChessGUI:
                 stopbits=serial.STOPBITS_ONE,
                 timeout=5.0
             )
-            print(f"✓ Connected to {self.port} at {self.baudrate} baud")
+            print(f"OK Connected to {self.port} at {self.baudrate} baud")
             time.sleep(2)  # Wait for Arduino/PIC reset
         except Exception as e:
             print(f"ERROR: Could not connect to {self.port}: {e}")
@@ -102,7 +102,7 @@ class ChessGUI:
             message = f"{fen}\r\n"
             self.serial_conn.write(message.encode('ascii'))
             self.serial_conn.flush()
-            print(f"→ Sent FEN: {fen}")
+            print(f"--> Sent FEN: {fen}")
             return True
         except Exception as e:
             print(f"ERROR: Failed to send FEN: {e}")
@@ -137,7 +137,7 @@ class ChessGUI:
             line = self.serial_conn.readline().decode('ascii').strip()
 
             if line:
-                print(f"← Received FEN: {line}")
+                print(f"<-- Received FEN: {line}")
                 return line
             else:
                 print("WARNING: No response from PIC (timeout)")
@@ -156,11 +156,11 @@ class ChessGUI:
 
         # Check game status
         if self.board.is_checkmate():
-            print("🏁 CHECKMATE!")
+            print("[GAME END] CHECKMATE!")
         elif self.board.is_stalemate():
-            print("🏁 STALEMATE!")
+            print("[GAME END] STALEMATE!")
         elif self.board.is_check():
-            print("⚠️  CHECK!")
+            print("WARNING  CHECK!")
 
         print("="*50 + "\n")
 
@@ -176,7 +176,7 @@ class ChessGUI:
         """
         try:
             self.board = chess.Board(fen)
-            print(f"✓ Position set from FEN: {fen}")
+            print(f"OK Position set from FEN: {fen}")
             return True
         except ValueError as e:
             print(f"ERROR: Invalid FEN: {e}")
@@ -198,7 +198,7 @@ class ChessGUI:
             if move in self.board.legal_moves:
                 self.board.push(move)
                 self.move_history.append(move)
-                print(f"✓ Move made: {move_str}")
+                print(f"OK Move made: {move_str}")
                 return True
             else:
                 print(f"ERROR: Illegal move: {move_str}")
@@ -215,14 +215,14 @@ class ChessGUI:
         - Send current FEN to PIC
         - Receive updated FEN from PIC (after AI move)
         """
-        print("\n📡 Syncing with PIC...")
+        print("\n[SYNC] Syncing with PIC...")
 
         # Send current position
         if not self.send_fen():
             return False
 
         # Wait for AI response
-        print("⏳ Waiting for AI response...")
+        print("[WAIT] Waiting for AI response...")
         fen = self.receive_fen(timeout=30.0)
 
         if fen:
@@ -240,9 +240,9 @@ class ChessGUI:
         print("="*50)
 
         if self.simulated:
-            print("⚠️  Running in SIMULATED mode (no hardware)")
+            print("WARNING  Running in SIMULATED mode (no hardware)")
         else:
-            print(f"✓ Connected to {self.port}")
+            print(f"OK Connected to {self.port}")
 
         print("\nCommands:")
         print("  <move>     - Make a move (e.g., 'e2e4')")
@@ -276,7 +276,7 @@ class ChessGUI:
                 elif parts[0] == 'new':
                     self.board = chess.Board()
                     self.move_history = []
-                    print("✓ New game started")
+                    print("OK New game started")
                     self.display_board()
 
                 elif parts[0] == 'fen':
@@ -325,7 +325,7 @@ def run_tests():
     gui = ChessGUI(simulated=True)
     gui.display_board()
     assert gui.board.fen() == chess.STARTING_FEN
-    print("✓ PASS: Board initialized to starting position")
+    print("OK PASS: Board initialized to starting position")
 
     # Test 2: FEN parsing
     print("\nTest 2: FEN Parsing")
@@ -334,7 +334,7 @@ def run_tests():
     assert gui.set_position_from_fen(test_fen)
     gui.display_board()
     assert gui.board.fen() == test_fen
-    print("✓ PASS: FEN parsing works correctly")
+    print("OK PASS: FEN parsing works correctly")
 
     # Test 3: Legal move
     print("\nTest 3: Legal Move")
@@ -342,14 +342,14 @@ def run_tests():
     gui = ChessGUI(simulated=True)
     assert gui.make_user_move("e2e4")
     gui.display_board()
-    print("✓ PASS: Legal move executed")
+    print("OK PASS: Legal move executed")
 
     # Test 4: Illegal move rejection
     print("\nTest 4: Illegal Move Rejection")
     print("-" * 40)
     gui = ChessGUI(simulated=True)
     assert not gui.make_user_move("e2e5")  # Illegal pawn move
-    print("✓ PASS: Illegal move rejected")
+    print("OK PASS: Illegal move rejected")
 
     # Test 5: FEN generation
     print("\nTest 5: FEN Generation")
@@ -360,7 +360,7 @@ def run_tests():
     expected_fen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
     assert fen == expected_fen
     print(f"Generated FEN: {fen}")
-    print("✓ PASS: FEN generation works correctly")
+    print("OK PASS: FEN generation works correctly")
 
     # Test 6: Simulated FEN send/receive
     print("\nTest 6: Simulated FEN Communication")
@@ -369,7 +369,7 @@ def run_tests():
     gui.send_fen()
     fen = gui.receive_fen()
     assert fen is not None
-    print("✓ PASS: Simulated FEN send/receive works")
+    print("OK PASS: Simulated FEN send/receive works")
 
     # Test 7: Game sequence
     print("\nTest 7: Complete Game Sequence")
@@ -380,7 +380,7 @@ def run_tests():
         assert gui.make_user_move(move)
         print(f"  Move: {move}")
     gui.display_board()
-    print("✓ PASS: Complete game sequence works")
+    print("OK PASS: Complete game sequence works")
 
     # Test 8: Checkmate detection
     print("\nTest 8: Checkmate Detection")
@@ -393,7 +393,7 @@ def run_tests():
     gui.make_user_move("d8h4")
     gui.display_board()
     assert gui.board.is_checkmate()
-    print("✓ PASS: Checkmate detected correctly")
+    print("OK PASS: Checkmate detected correctly")
 
     # Test 9: Promotion
     print("\nTest 9: Pawn Promotion")
@@ -403,7 +403,7 @@ def run_tests():
     gui.make_user_move("a7a8q")
     gui.display_board()
     assert gui.board.piece_at(chess.A8) == chess.Piece(chess.QUEEN, chess.WHITE)
-    print("✓ PASS: Pawn promotion works")
+    print("OK PASS: Pawn promotion works")
 
     # Test 10: FEN roundtrip
     print("\nTest 10: FEN Roundtrip")
@@ -417,11 +417,11 @@ def run_tests():
         gui.set_position_from_fen(fen)
         generated_fen = gui.board.fen()
         assert generated_fen == fen
-        print(f"  ✓ {fen[:30]}...")
-    print("✓ PASS: FEN roundtrip works for all positions")
+        print(f"  OK {fen[:30]}...")
+    print("OK PASS: FEN roundtrip works for all positions")
 
     print("\n" + "="*60)
-    print("  ALL TESTS PASSED! ✓")
+    print("  ALL TESTS PASSED! OK")
     print("="*60)
 
 

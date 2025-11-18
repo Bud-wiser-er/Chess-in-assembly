@@ -3,7 +3,7 @@
 
 ---
 
-## 🐛 Critical Bugs Found
+##  Critical Bugs Found
 
 ### Bug #1: FEN Generation File Loop (fen_support.S:320)
 
@@ -74,7 +74,7 @@ validate_move:
 
     ; Return validity (0 if in check, 1 if legal)
     movf    temp1, W
-    sublw   1           ; Invert: 0→1, 1→0
+    sublw   1           ; Invert: 0-->1, 1-->0
     return
 ```
 
@@ -177,7 +177,7 @@ fen_gen_castling:
 
     btfsc   BANKMASK(castle_rights), 0
     movlw   'K'
-    call    fen_put_char        ; BUG: Always calls!
+    call    fen_put_char        ; BUG: Always calls.
 ```
 
 **Problem:**
@@ -238,7 +238,7 @@ def _get_random_legal_move(self):
     pieces = []
     for idx in range(64):
         piece = self.board.board[idx]
-        if piece != ChessBoard.EMPTY:
+        if piece .= ChessBoard.EMPTY:
             is_white = (piece & 0x08) == 0
             if (is_white and self.board.turn == 'w') or \
                (not is_white and self.board.turn == 'b'):
@@ -270,7 +270,7 @@ Three separate modules:
 - `fen_support.S`
 - `move_validator.S`
 
-No way to build them together!
+No way to build them together.
 
 **Fix:**
 Create `chess_engine_integrated.S`:
@@ -299,16 +299,16 @@ main_loop:
 
 ---
 
-## 📊 Summary
+##  Summary
 
 | Bug # | Severity | Module | Status |
 |-------|----------|--------|--------|
-| 1 | CRITICAL | fen_support.S | ✅ **FIXED** |
-| 2 | CRITICAL | move_validator.S | ⚠️ Documented (placeholder) |
-| 3 | HIGH | move_validator.S | ✅ **FIXED** |
-| 4 | HIGH | move_validator.S | ✅ **FIXED** |
-| 5 | HIGH | move_validator.S | ⚠️ Documented |
-| 6 | MEDIUM | fen_support.S | ✅ **FIXED** |
+| 1 | CRITICAL | fen_support.S |  **FIXED** |
+| 2 | CRITICAL | move_validator.S |  Documented (placeholder) |
+| 3 | HIGH | move_validator.S |  **FIXED** |
+| 4 | HIGH | move_validator.S |  **FIXED** |
+| 5 | HIGH | move_validator.S |  Documented |
+| 6 | MEDIUM | fen_support.S |  **FIXED** |
 | 7 | LOW | chess_player.py | Works but limited |
 | 8 | HIGH | Integration | Needs new file |
 
@@ -319,7 +319,7 @@ main_loop:
 
 ---
 
-## 🔧 Recommended Actions
+##  Recommended Actions
 
 1. **Immediate:** Fix critical bugs #1 and #2
 2. **High Priority:** Fix parsing bugs #3, #4, #5
@@ -329,16 +329,16 @@ main_loop:
 
 ---
 
-## ⚠️ Current State
+##  Current State
 
 **Can the system work?**
-- ❌ **NO** - Critical bugs prevent correct operation
+-  **NO** - Critical bugs prevent correct operation
 - File loop bug causes infinite loop
 - Move validation accepts all moves (even illegal ones)
 - Square parsing rejects valid squares
 
 **After fixes:**
-- ✅ YES - System will work correctly
+-  YES - System will work correctly
 
 ---
 

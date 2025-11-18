@@ -48,8 +48,8 @@ For advanced users who prefer command-line:
 
 #### Create New Project
 1. Open MPLAB X IDE
-2. **File** ‚Üí **New Project**
-3. Choose **Microchip Embedded** ‚Üí **Standalone Project**
+2. **File** --> **New Project**
+3. Choose **Microchip Embedded** --> **Standalone Project**
 4. Click **Next**
 
 #### Device Selection
@@ -79,7 +79,7 @@ For advanced users who prefer command-line:
 5. All other files are included via `#include` directives
 
 #### Project Configuration
-Right-click project ‚Üí **Properties** ‚Üí **MPASM**:
+Right-click project --> **Properties** --> **MPASM**:
 - **Use absolute mode**: Unchecked
 - **Generate cross reference file**: Checked (optional)
 - **Generate symbol file**: Checked (optional)
@@ -100,11 +100,11 @@ Loading completed
 After successful build:
 ```
 dist/
-‚îî‚îÄ‚îÄ default/
-    ‚îî‚îÄ‚îÄ production/
-        ‚îú‚îÄ‚îÄ Chess-Engine.X.production.hex    # Flash programming file
-        ‚îú‚îÄ‚îÄ Chess-Engine.X.production.elf    # Executable linkable format
-        ‚îî‚îÄ‚îÄ Chess-Engine.X.production.lst    # Assembly listing
+îîîî default/
+    îîîî production/
+        îîî Chess-Engine.X.production.hex    # Flash programming file
+        îîî Chess-Engine.X.production.elf    # Executable linkable format
+        îîîî Chess-Engine.X.production.lst    # Assembly listing
 ```
 
 ---
@@ -165,12 +165,12 @@ make clean    # Clean build files
 2. Connect PICkit ICSP to target PIC18F45K22:
    ```
    PICkit     PIC18F45K22
-   ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ    ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
-   Pin 1 (MCLR)  ‚Üí MCLR (Pin 1)
-   Pin 2 (VDD)   ‚Üí VDD
-   Pin 3 (VSS)   ‚Üí VSS (Ground)
-   Pin 4 (PGD)   ‚Üí PGD (RB7)
-   Pin 5 (PGC)   ‚Üí PGC (RB6)
+   îîîîîîî    îîîîîîîîîîîî
+   Pin 1 (MCLR)  --> MCLR (Pin 1)
+   Pin 2 (VDD)   --> VDD
+   Pin 3 (VSS)   --> VSS (Ground)
+   Pin 4 (PGD)   --> PGD (RB7)
+   Pin 5 (PGC)   --> PGC (RB6)
    ```
 3. Optionally power target from PICkit (if supported)
 
@@ -210,7 +210,7 @@ ipecmd -P18F45K22 -Fchess_engine.hex -M -R
 ### Simulator (No Hardware Required)
 
 #### Setup Simulator
-1. **Project Properties** ‚Üí **Conf: [default]**
+1. **Project Properties** --> **Conf: [default]**
 2. **Select Tool**: Simulator
 3. Click **OK**
 4. Build project
@@ -231,20 +231,20 @@ ipecmd -P18F45K22 -Fchess_engine.hex -M -R
 3. Inspect registers in **Variables** window
 
 #### UART Simulation
-1. **Window** ‚Üí **Simulator** ‚Üí **UART1 I/O**
+1. **Window** --> **Simulator** --> **UART1 I/O**
 2. Type commands in UART window
 3. See output in same window
 
 ### Hardware Debugging (with PICkit)
 
 #### Enable Debug Mode
-1. **Production** ‚Üí **Set Configuration** ‚Üí **Debugging**
+1. **Production** --> **Set Configuration** --> **Debugging**
 2. Program device in debug mode
 3. Set breakpoints
 4. Use step/continue commands
 
 #### Watch Variables
-1. **Window** ‚Üí **Debugging** ‚Üí **Variables**
+1. **Window** --> **Debugging** --> **Variables**
 2. Add variables to watch:
    - `game_turn`
    - `move_count`
@@ -330,7 +330,7 @@ MOVE b8c6
 MOVE d1h5
 MOVE g8f6
 MOVE h5f7
-; Checkmate!
+; Checkmate.
 ```
 
 #### Test Special Moves
@@ -679,4 +679,4 @@ Before releasing:
 
 ---
 
-**Good luck with your development! üõ†Ô∏è**
+**Good luck with your development. õWARNINGWARNINGWARNING[WAIT]**

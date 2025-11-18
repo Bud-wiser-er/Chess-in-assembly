@@ -241,12 +241,12 @@ class SimpleChessGUI:
         if fen is None:
             fen = self.board.generate_fen()
 
-        print(f"→ Sending FEN: {fen}")
+        print(f"--> Sending FEN: {fen}")
         return True
 
     def receive_fen(self):
         """Receive FEN (simulated - makes random move)"""
-        print("← AI thinking...")
+        print("<-- AI thinking...")
         time.sleep(0.3)
 
         # Simulate AI making a move
@@ -256,7 +256,7 @@ class SimpleChessGUI:
             self.board.make_simple_move('e7', 'e5')
 
         fen = self.board.generate_fen()
-        print(f"← Received FEN: {fen}")
+        print(f"<-- Received FEN: {fen}")
         return fen
 
     def run_interactive(self):
@@ -292,14 +292,14 @@ class SimpleChessGUI:
 
                 elif parts[0] == 'new':
                     self.board.setup_starting_position()
-                    print("✓ New game started")
+                    print("OK New game started")
                     self.board.display()
 
                 elif parts[0] == 'fen':
                     if len(parts) > 1:
                         fen = ' '.join(parts[1:])
                         if self.board.parse_fen(fen):
-                            print("✓ Position set from FEN")
+                            print("OK Position set from FEN")
                             self.board.display()
                         else:
                             print("ERROR: Invalid FEN")
@@ -313,7 +313,7 @@ class SimpleChessGUI:
 
                     try:
                         self.board.make_simple_move(from_sq, to_sq)
-                        print(f"✓ Move made: {from_sq}{to_sq}")
+                        print(f"OK Move made: {from_sq}{to_sq}")
                         self.board.display()
 
                         # Send to PIC and get response
@@ -353,7 +353,7 @@ def run_tests():
     assert board.get_piece(board.square_to_index('e2')) == board.W_PAWN
     assert board.get_piece(board.square_to_index('e7')) == board.B_PAWN
     assert board.turn == 'w'
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 2: FEN parsing
@@ -364,7 +364,7 @@ def run_tests():
     board.display()
     assert board.get_piece(board.square_to_index('e4')) == board.W_PAWN
     assert board.turn == 'b'
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 3: FEN generation
@@ -375,7 +375,7 @@ def run_tests():
     print(f"Generated: {generated_fen}")
     print(f"Expected:  {board.STARTING_FEN}")
     assert generated_fen == board.STARTING_FEN
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 4: Simple move
@@ -387,7 +387,7 @@ def run_tests():
     assert board.get_piece(board.square_to_index('e4')) == board.W_PAWN
     assert board.get_piece(board.square_to_index('e2')) == board.EMPTY
     assert board.turn == 'b'
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 5: FEN roundtrip
@@ -404,8 +404,8 @@ def run_tests():
         print(f"  Input:  {fen}")
         print(f"  Output: {generated}")
         assert generated == fen, f"Mismatch: {generated} != {fen}"
-        print("  ✓ OK")
-    print("✓ PASS")
+        print("  OK OK")
+    print("OK PASS")
     passed += 1
 
     # Test 6: Square conversion
@@ -419,7 +419,7 @@ def run_tests():
         print(f"  {sq_idx} -> {name} (expected {sq_name})")
         assert idx == sq_idx
         assert name == sq_name
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 7: Piece encoding
@@ -433,7 +433,7 @@ def run_tests():
     assert board.get_piece(60) == board.B_KING  # e8
     assert board.get_piece(12) == board.W_PAWN  # e2
     assert board.get_piece(52) == board.B_PAWN  # e7
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 8: Empty board
@@ -445,7 +445,7 @@ def run_tests():
     fen = board.generate_fen()
     print(f"Empty board FEN: {fen}")
     assert '8/8/8/8/8/8/8/8' in fen
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 9: Complex position
@@ -456,7 +456,7 @@ def run_tests():
     board.display()
     generated = board.generate_fen()
     assert generated == complex_fen
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 10: Move sequence
@@ -468,14 +468,14 @@ def run_tests():
         board.make_simple_move(from_sq, to_sq)
         print(f"  Move: {from_sq}{to_sq}")
     board.display()
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Summary
     print("\n" + "="*60)
     print(f"  TESTS COMPLETE: {passed} passed, {failed} failed")
     if failed == 0:
-        print("  ALL TESTS PASSED! ✓")
+        print("  ALL TESTS PASSED! OK")
     print("="*60)
 
     return failed == 0

@@ -9,11 +9,11 @@ The PIC18F45K22 Chess Engine supports **move validation** and **FEN (Forsyth-Edw
 
 ### Key Features
 
-- âœ… **Move Validation** - PIC validates all moves before accepting them
-- âœ… **AI Response** - PIC makes AI move after validating user's move
-- âœ… **FEN Communication** - Standardized position exchange
-- âœ… **Error Reporting** - Clear error messages for invalid moves
-- âœ… **Game Control** - New game, position setup, AI difficulty control
+-  **Move Validation** - PIC validates all moves before accepting them
+-  **AI Response** - PIC makes AI move after validating user's move
+-  **FEN Communication** - Standardized position exchange
+-  **Error Reporting** - Clear error messages for invalid moves
+-  **Game Control** - New game, position setup, AI difficulty control
 
 ---
 
@@ -22,35 +22,35 @@ The PIC18F45K22 Chess Engine supports **move validation** and **FEN (Forsyth-Edw
 ### How It Works
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”                           â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   PC    â”‚                           â”‚   PIC   â”‚
-â”‚ Python  â”‚                           â”‚  Chess  â”‚
-â”‚  GUI    â”‚                           â”‚ Engine  â”‚
-â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜                           â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜
-     â”‚                                     â”‚
-     â”‚  1. User makes move (e.g., e2e4)   â”‚
-     â”‚                                     â”‚
-     â”‚  2. Send: "MOVE e2e4\r\n"          â”‚
-     â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚
-     â”‚                                     â”‚
-     â”‚                                3. Validate move
-     â”‚                                4. If valid:
-     â”‚                                   - Make user's move
-     â”‚                                   - AI thinks
-     â”‚                                   - Make AI move
-     â”‚                                   - Generate FEN
-     â”‚                                     â”‚
-     â”‚  5. Response: "OK <FEN>\r\n"       â”‚
-     â”‚<â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-     â”‚     or                              â”‚
-     â”‚  "ERROR Invalid move\r\n"           â”‚
-     â”‚<â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-     â”‚                                     â”‚
-     â”‚  6. Parse FEN and display board    â”‚
-     â”‚                                     â”‚
+”ERROR””””””””””[ ]                           ”ERROR””””””””””[ ]
+”‚   PC    ”‚                           ”‚   PIC   ”‚
+”‚ Python  ”‚                           ”‚  Chess  ”‚
+”‚  GUI    ”‚                           ”‚ Engine  ”‚
+”””””””¬”””””[ ]                           ”””””””¬”””””[ ]
+     ”‚                                     ”‚
+     ”‚  1. User makes move (e.g., e2e4)   ”‚
+     ”‚                                     ”‚
+     ”‚  2. Send: "MOVE e2e4\r\n"          ”‚
+     ”””””””””””””””””””””””””””””””””””””>”‚
+     ”‚                                     ”‚
+     ”‚                                3. Validate move
+     ”‚                                4. If valid:
+     ”‚                                   - Make user's move
+     ”‚                                   - AI thinks
+     ”‚                                   - Make AI move
+     ”‚                                   - Generate FEN
+     ”‚                                     ”‚
+     ”‚  5. Response: "OK <FEN>\r\n"       ”‚
+     ”‚<”””””””””””””””””””””””””””””””””””””[SEND]
+     ”‚     or                              ”‚
+     ”‚  "ERROR Invalid move\r\n"           ”‚
+     ”‚<”””””””””””””””””””””””””””””””””””””[SEND]
+     ”‚                                     ”‚
+     ”‚  6. Parse FEN and display board    ”‚
+     ”‚                                     ”‚
 ```
 
-### Commands (PC â†’ PIC)
+### Commands (PC --> PIC)
 
 | Command | Format | Description | Example |
 |---------|--------|-------------|---------|
@@ -59,7 +59,7 @@ The PIC18F45K22 Chess Engine supports **move validation** and **FEN (Forsyth-Edw
 | **NEW** | `NEW <level>\r\n` | Start new game | `NEW 2\r\n` |
 | **GET** | `GET\r\n` | Get current position | `GET\r\n` |
 
-### Responses (PIC â†’ PC)
+### Responses (PIC --> PC)
 
 | Response | Format | Description | Example |
 |----------|--------|-------------|---------|
@@ -71,20 +71,20 @@ The PIC18F45K22 Chess Engine supports **move validation** and **FEN (Forsyth-Edw
 
 **Valid Move:**
 ```
-PC â†’ PIC: MOVE e2e4\r\n
-PIC â†’ PC: OK rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1\r\n
+PC --> PIC: MOVE e2e4\r\n
+PIC --> PC: OK rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1\r\n
 ```
 
 **Invalid Move:**
 ```
-PC â†’ PIC: MOVE e2e5\r\n
-PIC â†’ PC: ERROR Invalid move\r\n
+PC --> PIC: MOVE e2e5\r\n
+PIC --> PC: ERROR Invalid move\r\n
 ```
 
 **Pawn Promotion:**
 ```
-PC â†’ PIC: MOVE e7e8Q\r\n
-PIC â†’ PC: OK rnbqkb1r/pppp1ppp/5n2/4Q3/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1\r\n
+PC --> PIC: MOVE e7e8Q\r\n
+PIC --> PC: OK rnbqkb1r/pppp1ppp/5n2/4Q3/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1\r\n
 ```
 
 ---
@@ -97,8 +97,8 @@ A FEN string consists of **6 fields** separated by spaces:
 
 ```
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”¬ â””â”¬â”˜ â”¬ â”¬ â”¬
-                   â”‚                    â”‚  â”‚  â”‚ â”‚ â”‚
+”””””””””””””””””””””¬”””””””””””””””””””[ ] ”¬ ”””¬”[ ] ”¬ ”¬ ”¬
+                   ”‚                    ”‚  ”‚  ”‚ ”‚ ”‚
         1. Piece Placement             2 3 4 5 6
 ```
 
@@ -168,7 +168,7 @@ r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 5
 
 ### Message Format
 
-#### FEN Input (PC â†’ PIC)
+#### FEN Input (PC --> PIC)
 ```
 <FEN_STRING>\r\n
 ```
@@ -178,7 +178,7 @@ r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 5
 rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\r\n
 ```
 
-#### FEN Output (PIC â†’ PC)
+#### FEN Output (PIC --> PC)
 ```
 <FEN_STRING>\r\n
 ```
@@ -287,7 +287,7 @@ Standalone Python script for testing FEN communication.
 
 #### Installation
 
-**No external dependencies required!**
+**No external dependencies required.**
 
 ```bash
 python3 chess_gui_simple.py --test     # Run tests
@@ -316,10 +316,10 @@ python3 chess_gui_simple.py
 **Example Session:**
 ```
 Your move > e2e4
-âœ“ Move made: e2e4
-â†’ Sending FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
-â† AI thinking...
-â† Received FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2
+PASS Move made: e2e4
+--> Sending FEN: rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
+<-- AI thinking...
+<-- Received FEN: rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2
 
   =================================
 8 | r | n | b | q | k | b | n | r |
@@ -332,60 +332,60 @@ Your move > e2e4
 
 ---
 
-## Workflow: PC â†” PIC Communication
+## Workflow: PC -->” PIC Communication
 
 ### Typical Game Flow
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚    PC    â”‚                    â”‚   PIC    â”‚
-â”‚  Python  â”‚                    â”‚ Chess    â”‚
-â”‚   GUI    â”‚                    â”‚ Engine   â”‚
-â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜                    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
-     â”‚                               â”‚
-     â”‚  1. Send starting FEN         â”‚
-     â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚
-     â”‚  "rnbqkbnr/pppppppp/..."      â”‚
-     â”‚                               â”‚
-     â”‚                          2. Parse FEN
-     â”‚                          3. Update board
-     â”‚                               â”‚
-     â”‚  4. User makes move (e2e4)    â”‚
-     â”‚                               â”‚
-     â”‚  5. Send updated FEN          â”‚
-     â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€>â”‚
-     â”‚  "rnbqkbnr/.../4P3/..."       â”‚
-     â”‚                               â”‚
-     â”‚                          6. Parse FEN
-     â”‚                          7. AI thinks
-     â”‚                          8. Make AI move
-     â”‚                          9. Generate FEN
-     â”‚                               â”‚
-     â”‚  10. Receive FEN              â”‚
-     â”‚<â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-     â”‚  "rnbqkbnr/.../4p3/4P3/..."   â”‚
-     â”‚                               â”‚
-     â”‚  11. Parse FEN                â”‚
-     â”‚  12. Display board            â”‚
-     â”‚                               â”‚
-     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+”ERROR”””””””””””[ ]                    ”ERROR”””””””””””[ ]
+”‚    PC    ”‚                    ”‚   PIC    ”‚
+”‚  Python  ”‚                    ”‚ Chess    ”‚
+”‚   GUI    ”‚                    ”‚ Engine   ”‚
+”””””””¬””””””[ ]                    ”””””””¬””””””[ ]
+     ”‚                               ”‚
+     ”‚  1. Send starting FEN         ”‚
+     ”””””””””””””””””””””””””””””””>”‚
+     ”‚  "rnbqkbnr/pppppppp/..."      ”‚
+     ”‚                               ”‚
+     ”‚                          2. Parse FEN
+     ”‚                          3. Update board
+     ”‚                               ”‚
+     ”‚  4. User makes move (e2e4)    ”‚
+     ”‚                               ”‚
+     ”‚  5. Send updated FEN          ”‚
+     ”””””””””””””””””””””””””””””””>”‚
+     ”‚  "rnbqkbnr/.../4P3/..."       ”‚
+     ”‚                               ”‚
+     ”‚                          6. Parse FEN
+     ”‚                          7. AI thinks
+     ”‚                          8. Make AI move
+     ”‚                          9. Generate FEN
+     ”‚                               ”‚
+     ”‚  10. Receive FEN              ”‚
+     ”‚<”””””””””””””””””””””””””””””””[SEND]
+     ”‚  "rnbqkbnr/.../4p3/4P3/..."   ”‚
+     ”‚                               ”‚
+     ”‚  11. Parse FEN                ”‚
+     ”‚  12. Display board            ”‚
+     ”‚                               ”‚
+     ””””””””””””””””””””””””””””””””””[ ]
 ```
 
 ### Communication Example
 
 **Step 1: Initialize Game**
 ```
-PC â†’ PIC: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\r\n"
+PC --> PIC: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\r\n"
 ```
 
 **Step 2: User Move (e2-e4)**
 ```
-PC â†’ PIC: "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\r\n"
+PC --> PIC: "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\r\n"
 ```
 
 **Step 3: AI Response (e7-e5)**
 ```
-PIC â†’ PC: "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2\r\n"
+PIC --> PC: "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2\r\n"
 ```
 
 ---
@@ -400,16 +400,16 @@ python3 chess_gui_simple.py --test
 ```
 
 **Tests include:**
-1. âœ… Board initialization
-2. âœ… FEN parsing
-3. âœ… FEN generation
-4. âœ… Simple moves
-5. âœ… FEN roundtrip (parse â†’ generate â†’ parse)
-6. âœ… Square conversion (algebraic â†” index)
-7. âœ… Piece encoding
-8. âœ… Empty board handling
-9. âœ… Complex positions
-10. âœ… Move sequences
+1.  Board initialization
+2.  FEN parsing
+3.  FEN generation
+4.  Simple moves
+5.  FEN roundtrip (parse --> generate --> parse)
+6.  Square conversion (algebraic -->” index)
+7.  Piece encoding
+8.  Empty board handling
+9.  Complex positions
+10.  Move sequences
 
 ### Manual Testing
 
@@ -438,9 +438,9 @@ print(fen)
 ### With Serial Connection
 
 **1. Connect PIC to PC:**
-- TX (RC7/Pin 18) â†’ RX on USB-Serial adapter
-- RX (RC6/Pin 17) â†’ TX on USB-Serial adapter
-- GND â†’ GND
+- TX (RC7/Pin 18) --> RX on USB-Serial adapter
+- RX (RC6/Pin 17) --> TX on USB-Serial adapter
+- GND --> GND
 
 **2. Find Serial Port:**
 
@@ -457,7 +457,7 @@ ls /dev/cu.usbserial*
 
 **Windows:**
 ```
-Device Manager â†’ Ports (COM & LPT)
+Device Manager --> Ports (COM & LPT)
 # Look for COM3, COM4, etc.
 ```
 
@@ -469,8 +469,8 @@ python3 chess_gui.py /dev/ttyUSB0
 **4. Test Communication:**
 ```
 Your move > fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-â†’ Sent FEN to PIC
-â† Waiting for response...
+--> Sent FEN to PIC
+<-- Waiting for response...
 ```
 
 ---
@@ -480,7 +480,7 @@ Your move > fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 ### Common Issues
 
 **1. No Response from PIC**
-- Check UART connections (RX â†” TX swapped?)
+- Check UART connections (RX -->” TX swapped?)
 - Verify baud rate (9600)
 - Check PIC is powered and programmed
 - Test with serial monitor (PuTTY, minicom)
@@ -612,15 +612,15 @@ gui.board.display()
 
 ## Summary
 
-- âœ… **FEN parsing** - Convert FEN string to board position
-- âœ… **FEN generation** - Create FEN from current position
-- âœ… **UART communication** - Send/receive FEN via serial
-- âœ… **Python interface** - Complete GUI for testing
-- âœ… **Fully tested** - 10 automated tests passing
-- âœ… **Standardized** - Compatible with chess tools
-- âœ… **Documented** - Complete protocol specification
+-  **FEN parsing** - Convert FEN string to board position
+-  **FEN generation** - Create FEN from current position
+-  **UART communication** - Send/receive FEN via serial
+-  **Python interface** - Complete GUI for testing
+-  **Fully tested** - 10 automated tests passing
+-  **Standardized** - Compatible with chess tools
+-  **Documented** - Complete protocol specification
 
-**Status**: Ready for integration and testing! ðŸš€
+**Status**: Ready for integration and testing. 
 
 ---
 

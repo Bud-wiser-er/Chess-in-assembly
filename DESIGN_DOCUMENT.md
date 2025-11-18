@@ -67,7 +67,7 @@ Stack:           Hardware stack (31 levels)
   - AI algorithms (~6-8 KB)
   - I/O handlers (~2 KB)
   - Utilities and tables (~4-6 KB)
-  - **Total estimate**: 24-32 KB (TIGHT!)
+  - **Total estimate**: 24-32 KB (TIGHT.)
 
 #### Processing Constraints
 - 8-bit operations only (16-bit requires multiple instructions)
@@ -86,30 +86,30 @@ Stack:           Hardware stack (31 levels)
 
 ### 3.1 High-Level Architecture
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         UART Communication Layer            â”‚
-â”‚   (Input Parser / Output Formatter)         â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                 â”‚
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚          Game Controller                    â”‚
-â”‚  (Main Loop, Turn Management, UI)           â”‚
-â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-     â”‚                              â”‚
-â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚  Chess Rules     â”‚   â”‚   AI Engine          â”‚
-â”‚  Engine          â”‚   â”‚                      â”‚
-â”‚                  â”‚   â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
-â”‚ - Move Generator â”‚   â”‚  â”‚ Level 1: Random â”‚ â”‚
-â”‚ - Move Validator â”‚   â”‚  â”‚ Level 2: Eval   â”‚ â”‚
-â”‚ - Check Detector â”‚   â”‚  â”‚ Level 3: Minimaxâ”‚ â”‚
-â”‚ - Special Moves  â”‚   â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-         â”‚
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚        Board Representation                  â”‚
-â”‚  (Memory-efficient data structures)          â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+”ERROR””””””””””””””””””””””””””””””””””””””””””””””[ ]
+”‚         UART Communication Layer            ”‚
+”‚   (Input Parser / Output Formatter)         ”‚
+”””””””””””””””””””¬”””””””””””””””””””””””””””””[ ]
+                 ”‚
+”ERROR”””””””””””””””””´”””””””””””””””””””””””””””””[ ]
+”‚          Game Controller                    ”‚
+”‚  (Main Loop, Turn Management, UI)           ”‚
+”””””””¬”””””””””””””””””””””””””””””””¬””””””””””[ ]
+     ”‚                              ”‚
+”ERROR”””””´””””””””””””””[ ]   ”ERROR”””””””””””””´””””””””””[ ]
+”‚  Chess Rules     ”‚   ”‚   AI Engine          ”‚
+”‚  Engine          ”‚   ”‚                      ”‚
+”‚                  ”‚   ”‚  ”ERROR””””””””””””””””””[ ] ”‚
+”‚ - Move Generator ”‚   ”‚  ”‚ Level 1: Random ”‚ ”‚
+”‚ - Move Validator ”‚   ”‚  ”‚ Level 2: Eval   ”‚ ”‚
+”‚ - Check Detector ”‚   ”‚  ”‚ Level 3: Minimax”‚ ”‚
+”‚ - Special Moves  ”‚   ”‚  ””””””””””””””””””””[ ] ”‚
+”””””””””””””””””””””[ ]   ”””””””””””””””””””””””””[ ]
+         ”‚
+”ERROR”””””””””´””””””””””””””””””””””””””””””””””””””[ ]
+”‚        Board Representation                  ”‚
+”‚  (Memory-efficient data structures)          ”‚
+”””””””””””””””””””””””””””””””””””””””””””””””””[ ]
 ```
 
 ### 3.2 Module Breakdown
@@ -168,16 +168,16 @@ Stack:           Hardware stack (31 levels)
 **Choice Rationale**: Given RAM constraints, we need the most compact representation that still allows reasonable access speed.
 
 **Options Considered**:
-1. âœ— **Bitboards** (8 bytes Ã— 12 piece types = 96 bytes)
+1. — **Bitboards** (8 bytes Ã— 12 piece types = 96 bytes)
    - Pros: Fast move generation
    - Cons: Requires 64-bit operations on 8-bit MCU (VERY expensive)
 
-2. âœ“ **Mailbox (8Ã—8 array)** (64 bytes + metadata)
+2. PASS **Mailbox (8Ã—8 array)** (64 bytes + metadata)
    - Pros: Simple, direct access, 8-bit friendly
    - Cons: Slower iteration
    - **SELECTED**: Best fit for 8-bit architecture
 
-3. âœ— **0x88 Board** (128 bytes)
+3. — **0x88 Board** (128 bytes)
    - Pros: Fast boundary checking
    - Cons: Wastes 50% of memory
 
@@ -245,7 +245,7 @@ UART RX Buffer:       64 bytes
 UART TX Buffer:      128 bytes
 Working Memory:      100 bytes
 Reserve:             684 bytes (for future features/safety)
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+””””””””””””””””””””””””””””
 TOTAL:              1536 bytes (100% of RAM)
 ```
 
@@ -301,10 +301,10 @@ TOTAL:              1536 bytes (100% of RAM)
    "BLACK: e7-e5"
 
 3. Status Messages
-   "Check!"
-   "Checkmate! White wins."
-   "Stalemate! Draw."
-   "Illegal move!"
+   "Check."
+   "Checkmate. White wins."
+   "Stalemate. Draw."
+   "Illegal move."
 
 4. AI Thinking
    "Thinking... (Level 3)"
@@ -547,30 +547,30 @@ Since we may not have physical hardware:
 
 ```
 chess-engine/
-â”œâ”€â”€ main.asm                 # Main program entry, initialization
-â”œâ”€â”€ board.asm                # Board representation and basic operations
-â”œâ”€â”€ movegen.asm              # Move generation engine
-â”œâ”€â”€ makemove.asm             # Move making/unmaking
-â”œâ”€â”€ check.asm                # Check, checkmate, stalemate detection
-â”œâ”€â”€ evaluate.asm             # Position evaluation
-â”œâ”€â”€ ai_level1.asm            # Random move AI
-â”œâ”€â”€ ai_level2.asm            # Static evaluation AI
-â”œâ”€â”€ ai_level3.asm            # Minimax AI
-â”œâ”€â”€ uart.asm                 # UART communication
-â”œâ”€â”€ parser.asm               # Command parsing
-â”œâ”€â”€ display.asm              # Board display formatting
-â”œâ”€â”€ utils.asm                # Utility functions
-â”œâ”€â”€ tables.asm               # Lookup tables (piece-square, etc.)
-â”œâ”€â”€ config.inc               # Configuration bits
-â”œâ”€â”€ definitions.inc          # Constants and macros
-â”œâ”€â”€ memory.inc               # Memory map definitions
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ test_board.asm
-â”‚   â”œâ”€â”€ test_movegen.asm
-â”‚   â”œâ”€â”€ test_check.asm
-â”‚   â””â”€â”€ perft.asm
-â””â”€â”€ docs/
-    â””â”€â”€ DESIGN_DOCUMENT.md   # This file
+””” main.asm                 # Main program entry, initialization
+””” board.asm                # Board representation and basic operations
+””” movegen.asm              # Move generation engine
+””” makemove.asm             # Move making/unmaking
+””” check.asm                # Check, checkmate, stalemate detection
+””” evaluate.asm             # Position evaluation
+””” ai_level1.asm            # Random move AI
+””” ai_level2.asm            # Static evaluation AI
+””” ai_level3.asm            # Minimax AI
+””” uart.asm                 # UART communication
+””” parser.asm               # Command parsing
+””” display.asm              # Board display formatting
+””” utils.asm                # Utility functions
+””” tables.asm               # Lookup tables (piece-square, etc.)
+””” config.inc               # Configuration bits
+””” definitions.inc          # Constants and macros
+””” memory.inc               # Memory map definitions
+””” tests/
+”‚   ””” test_board.asm
+”‚   ””” test_movegen.asm
+”‚   ””” test_check.asm
+”‚   ”””” perft.asm
+”””” docs/
+    ”””” DESIGN_DOCUMENT.md   # This file
 ```
 
 ## 12. FUTURE ENHANCEMENTS (Out of Scope)

@@ -7,8 +7,8 @@ This program allows you to play chess against the PIC18F45K22 microcontroller.
 The PIC validates all moves and responds with its own moves.
 
 Protocol:
-- User makes move → PC sends "MOVE e2e4" → PIC validates
-- If valid: PIC makes AI move → sends "OK <FEN>"
+- User makes move --> PC sends "MOVE e2e4" --> PIC validates
+- If valid: PIC makes AI move --> sends "OK <FEN>"
 - If invalid: PIC sends "ERROR Invalid move"
 
 Features:
@@ -181,7 +181,7 @@ class PICChessInterface:
                 stopbits=serial.STOPBITS_ONE,
                 timeout=30.0
             )
-            print(f"✓ Connected to {self.port} at 9600 baud")
+            print(f"OK Connected to {self.port} at 9600 baud")
             time.sleep(2)
         except ImportError:
             print("ERROR: pyserial not installed. Install with: pip install pyserial")
@@ -205,7 +205,7 @@ class PICChessInterface:
         command = f"MOVE {move}\r\n"
 
         if self.simulated:
-            print(f"→ Sending: MOVE {move}")
+            print(f"--> Sending: MOVE {move}")
             # Simulate PIC validation
             return self._simulate_move(move)
 
@@ -213,11 +213,11 @@ class PICChessInterface:
             # Send move command
             self.serial_conn.write(command.encode('ascii'))
             self.serial_conn.flush()
-            print(f"→ Sent: MOVE {move}")
+            print(f"--> Sent: MOVE {move}")
 
             # Wait for response
             response = self.serial_conn.readline().decode('ascii').strip()
-            print(f"← Received: {response}")
+            print(f"<-- Received: {response}")
 
             # Parse response
             if response.startswith("OK "):
@@ -291,10 +291,10 @@ class PICChessInterface:
     def new_game(self, ai_level=2):
         """Start new game"""
         if self.simulated:
-            print(f"→ NEW {ai_level}")
+            print(f"--> NEW {ai_level}")
             self.board.parse_fen(ChessBoard.STARTING_FEN)
             self.move_history = []
-            print("✓ New game started")
+            print("OK New game started")
             return True
 
         try:
@@ -321,9 +321,9 @@ class PICChessInterface:
         print("="*60)
 
         if self.simulated:
-            print("⚠️  Running in SIMULATED mode (no hardware)")
+            print("WARNING  Running in SIMULATED mode (no hardware)")
         else:
-            print(f"✓ Connected to {self.port}")
+            print(f"OK Connected to {self.port}")
 
         print("\nHow it works:")
         print("  1. You make a move (e.g., 'e2e4')")
@@ -366,12 +366,12 @@ class PICChessInterface:
                     continue
 
                 # It's a move - send to PIC for validation
-                print(f"\n📤 Sending move to PIC for validation...")
+                print(f"\n[SEND] Sending move to PIC for validation...")
                 success, response = self.send_move(move)
 
                 if success:
                     # Move was valid, PIC responded with new position
-                    print(f"✅ Move accepted! PIC responded.")
+                    print(f"OK Move accepted! PIC responded.")
                     self.move_history.append(move)
 
                     # Update board from FEN
@@ -380,7 +380,7 @@ class PICChessInterface:
 
                 else:
                     # Move was invalid
-                    print(f"❌ Move rejected: {response}")
+                    print(f"ERROR Move rejected: {response}")
                     print("Try a different move.")
 
             except KeyboardInterrupt:
@@ -410,7 +410,7 @@ def run_tests():
     print("-" * 40)
     interface.board.display()
     assert interface.board.generate_fen() == ChessBoard.STARTING_FEN
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 2: Valid move (e2e4)
@@ -421,7 +421,7 @@ def run_tests():
         print(f"Move accepted, response FEN: {response}")
         interface.board.parse_fen(response)
         interface.board.display()
-        print("✓ PASS")
+        print("OK PASS")
         passed += 1
     else:
         print(f"FAIL: Move rejected: {response}")
@@ -434,7 +434,7 @@ def run_tests():
     success, response = interface.send_move("xyz")
     if not success:
         print(f"Correctly rejected: {response}")
-        print("✓ PASS")
+        print("OK PASS")
         passed += 1
     else:
         print("FAIL: Invalid move was accepted")
@@ -447,7 +447,7 @@ def run_tests():
     success, response = interface.send_move("z9a1")
     if not success:
         print(f"Correctly rejected: {response}")
-        print("✓ PASS")
+        print("OK PASS")
         passed += 1
     else:
         print("FAIL: Invalid square was accepted")
@@ -463,11 +463,11 @@ def run_tests():
         success, response = interface.send_move(move)
         if success:
             interface.board.parse_fen(response)
-            print(f"    ✓ Accepted")
+            print(f"    OK Accepted")
         else:
-            print(f"    ✗ Rejected: {response}")
+            print(f"    � Rejected: {response}")
     interface.board.display()
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Test 6: New game
@@ -475,14 +475,14 @@ def run_tests():
     print("-" * 40)
     interface.new_game()
     assert interface.board.generate_fen() == ChessBoard.STARTING_FEN
-    print("✓ PASS")
+    print("OK PASS")
     passed += 1
 
     # Summary
     print("\n" + "="*60)
     print(f"  TESTS COMPLETE: {passed} passed, {failed} failed")
     if failed == 0:
-        print("  ALL TESTS PASSED! ✓")
+        print("  ALL TESTS PASSED! OK")
     print("="*60)
 
     return failed == 0
