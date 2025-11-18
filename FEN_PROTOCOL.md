@@ -5,7 +5,87 @@
 
 ## Overview
 
-The PIC18F45K22 Chess Engine now supports **FEN (Forsyth-Edwards Notation)** for position exchange via UART serial communication. This allows the microcontroller to communicate with external chess programs, GUIs, and analysis tools using a standardized format.
+The PIC18F45K22 Chess Engine supports **move validation** and **FEN (Forsyth-Edwards Notation)** communication via UART. The PIC acts as the **authoritative validator** for all moves, ensuring chess rules are enforced at the microcontroller level.
+
+### Key Features
+
+- ✅ **Move Validation** - PIC validates all moves before accepting them
+- ✅ **AI Response** - PIC makes AI move after validating user's move
+- ✅ **FEN Communication** - Standardized position exchange
+- ✅ **Error Reporting** - Clear error messages for invalid moves
+- ✅ **Game Control** - New game, position setup, AI difficulty control
+
+---
+
+## Move Validation Protocol (Primary)
+
+### How It Works
+
+```
+┌─────────┐                           ┌─────────┐
+│   PC    │                           │   PIC   │
+│ Python  │                           │  Chess  │
+│  GUI    │                           │ Engine  │
+└────┬────┘                           └────┬────┘
+     │                                     │
+     │  1. User makes move (e.g., e2e4)   │
+     │                                     │
+     │  2. Send: "MOVE e2e4\r\n"          │
+     ├────────────────────────────────────>│
+     │                                     │
+     │                                3. Validate move
+     │                                4. If valid:
+     │                                   - Make user's move
+     │                                   - AI thinks
+     │                                   - Make AI move
+     │                                   - Generate FEN
+     │                                     │
+     │  5. Response: "OK <FEN>\r\n"       │
+     │<────────────────────────────────────┤
+     │     or                              │
+     │  "ERROR Invalid move\r\n"           │
+     │<────────────────────────────────────┤
+     │                                     │
+     │  6. Parse FEN and display board    │
+     │                                     │
+```
+
+### Commands (PC → PIC)
+
+| Command | Format | Description | Example |
+|---------|--------|-------------|---------|
+| **MOVE** | `MOVE <from><to>[promo]\r\n` | Make a move | `MOVE e2e4\r\n` |
+| **FEN** | `FEN <fen_string>\r\n` | Set position from FEN | `FEN rnbqkbnr/...\r\n` |
+| **NEW** | `NEW <level>\r\n` | Start new game | `NEW 2\r\n` |
+| **GET** | `GET\r\n` | Get current position | `GET\r\n` |
+
+### Responses (PIC → PC)
+
+| Response | Format | Description | Example |
+|----------|--------|-------------|---------|
+| **OK** | `OK <fen_string>\r\n` | Move accepted, new position | `OK rnbqkbnr/...\r\n` |
+| **ERROR** | `ERROR <message>\r\n` | Move rejected, reason given | `ERROR Invalid move\r\n` |
+| **FEN** | `FEN <fen_string>\r\n` | Current position (response to GET) | `FEN rnbqkbnr/...\r\n` |
+
+### Move Examples
+
+**Valid Move:**
+```
+PC → PIC: MOVE e2e4\r\n
+PIC → PC: OK rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1\r\n
+```
+
+**Invalid Move:**
+```
+PC → PIC: MOVE e2e5\r\n
+PIC → PC: ERROR Invalid move\r\n
+```
+
+**Pawn Promotion:**
+```
+PC → PIC: MOVE e7e8Q\r\n
+PIC → PC: OK rnbqkb1r/pppp1ppp/5n2/4Q3/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1\r\n
+```
 
 ---
 
