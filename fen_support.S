@@ -317,8 +317,8 @@ fen_gen_empty_square:
 fen_gen_next_file:
     incf    BANKMASK(fen_file), F
     movf    BANKMASK(fen_file), W
-    sublw   7
-    bnz     fen_gen_file_loop
+    xorlw   8                   ; Check if file == 8 (past 'h')
+    bnz     fen_gen_file_loop   ; Continue if not yet 8
 
     ; End of rank - output empty count if any
     movf    temp1, W
@@ -362,19 +362,27 @@ fen_gen_castling:
     movf    BANKMASK(castle_rights), W
     bz      fen_gen_no_castling
 
-    btfsc   BANKMASK(castle_rights), 0
+    ; Check each castling bit and output character
+    btfss   BANKMASK(castle_rights), 0
+    bra     check_WQ
     movlw   'K'
     call    fen_put_char
 
-    btfsc   BANKMASK(castle_rights), 1
+check_WQ:
+    btfss   BANKMASK(castle_rights), 1
+    bra     check_BK
     movlw   'Q'
     call    fen_put_char
 
-    btfsc   BANKMASK(castle_rights), 2
+check_BK:
+    btfss   BANKMASK(castle_rights), 2
+    bra     check_BQ
     movlw   'k'
     call    fen_put_char
 
-    btfsc   BANKMASK(castle_rights), 3
+check_BQ:
+    btfss   BANKMASK(castle_rights), 3
+    bra     fen_gen_enpassant
     movlw   'q'
     call    fen_put_char
 

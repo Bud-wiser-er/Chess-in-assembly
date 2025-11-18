@@ -251,17 +251,22 @@ parse_square:
     incf    FSR0H, F
 
     movf    INDF0, W
+    movwf   temp3           ; Save file character
     incf    BANKMASK(cmd_ptr), F
 
     ; Check if valid file (a-h)
-    sublw   'a'
-    bn      parse_square_invalid
-    movf    INDF0, W
-    sublw   'h'
-    bn      parse_square_invalid
+    ; Check char >= 'a'
+    movlw   'a'
+    subwf   temp3, W        ; W = char - 'a'
+    bn      parse_square_invalid  ; If negative, char < 'a'
+
+    ; Check char <= 'h'
+    movf    temp3, W
+    sublw   'h'             ; W = 'h' - char
+    bn      parse_square_invalid  ; If negative, char > 'h'
 
     ; Calculate file (0-7)
-    movf    INDF0, W
+    movf    temp3, W
     sublw   'a'
     negf    WREG
     movwf   temp1
@@ -276,17 +281,22 @@ parse_square:
     incf    FSR0H, F
 
     movf    INDF0, W
+    movwf   temp3           ; Save rank character
     incf    BANKMASK(cmd_ptr), F
 
     ; Check if valid rank (1-8)
-    sublw   '1'
-    bn      parse_square_invalid
-    movf    INDF0, W
-    sublw   '8'
-    bn      parse_square_invalid
+    ; Check char >= '1'
+    movlw   '1'
+    subwf   temp3, W        ; W = char - '1'
+    bn      parse_square_invalid  ; If negative, char < '1'
+
+    ; Check char <= '8'
+    movf    temp3, W
+    sublw   '8'             ; W = '8' - char
+    bn      parse_square_invalid  ; If negative, char > '8'
 
     ; Calculate rank (0-7)
-    movf    INDF0, W
+    movf    temp3, W
     sublw   '1'
     negf    WREG
     movwf   temp2
@@ -642,16 +652,25 @@ rx_done:
     return
 
 ; ============================================================================
-; Placeholder for move validation (implement with full move generator)
+; validate_move - Validate if move is legal
+; ============================================================================
+; ⚠️ WARNING: THIS IS A PLACEHOLDER IMPLEMENTATION
+; Currently accepts ALL moves as valid for testing purposes.
+;
+; For production use, implement full move validation:
+;   1. Generate all legal moves for current position
+;   2. Check if curr_from/curr_to matches any legal move
+;   3. Verify move doesn't leave king in check
+;   4. Return 1 if legal, 0 if illegal
+;
+; Input:  curr_from, curr_to, curr_flags set
+; Output: W = 1 if move is valid, 0 if invalid
 ; ============================================================================
 validate_move:
-    ; TODO: Implement full move validation
-    ; For now, return 1 (valid) as placeholder
-    ; Real implementation would:
-    ; 1. Generate all legal moves
-    ; 2. Check if curr_from/curr_to matches any legal move
-    ; 3. Return 1 if found, 0 if not
+    ; TEMPORARY IMPLEMENTATION - ACCEPTS ALL MOVES
+    ; This allows testing of the protocol without full chess logic
+    ; Replace this with actual move validation before deployment!
 
-    retlw   1       ; Temporary: always valid
+    retlw   1       ; Always return valid (TEMPORARY)
 
     END
