@@ -6,11 +6,17 @@ A complete chess engine implementation in assembly language for the PIC18F45K22 
 
 **MPASM has been deprecated by Microchip!** Starting with MPLAB X v5.40, you must use **PIC-AS** (part of MPLAB XC8).
 
-This project provides **TWO versions**:
-- **`.asm` files** - Legacy MPASM syntax (for reference only, won't build on modern MPLAB X)
-- **`.S` files** - Modern PIC-AS syntax (use these for actual development)
+### 🚀 QUICK START - Use This File:
+**`chess_engine_complete.S`** - Complete single-file PIC-AS version (ready to build!)
 
-**👉 See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for complete conversion guide!**
+See **[QUICK_START_PIC-AS.md](QUICK_START_PIC-AS.md)** for step-by-step build instructions.
+
+### File Versions:
+- ✅ **`chess_engine_complete.S`** - All-in-one PIC-AS version (**USE THIS!**)
+- 📝 **`.S` files** - Individual module templates (PIC-AS syntax)
+- 📚 **`.asm` files** - Legacy MPASM (reference only, won't build on modern MPLAB X)
+
+**👉 See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for complete syntax conversion guide!**
 
 ## Project Overview
 
