@@ -2,6 +2,16 @@
 
 A complete chess engine implementation in assembly language for the PIC18F45K22 microcontroller.
 
+## ⚠️ IMPORTANT: MPASM vs PIC-AS
+
+**MPASM has been deprecated by Microchip!** Starting with MPLAB X v5.40, you must use **PIC-AS** (part of MPLAB XC8).
+
+This project provides **TWO versions**:
+- **`.asm` files** - Legacy MPASM syntax (for reference only, won't build on modern MPLAB X)
+- **`.S` files** - Modern PIC-AS syntax (use these for actual development)
+
+**👉 See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for complete conversion guide!**
+
 ## Project Overview
 
 This project implements a fully functional chess engine on an 8-bit microcontroller with severe resource constraints:
@@ -91,23 +101,31 @@ UART |18 23| RD3  <- RC6 (RX)
 ## Software Setup
 
 ### Development Tools
-- **MPLAB X IDE** (v6.0 or later)
-- **MPASM Assembler** (included with MPLAB X)
+- **MPLAB X IDE** (v5.40 or later) - **Required**
+- **MPLAB XC8 Compiler** (includes PIC-AS assembler) - **Required**
 - **PICkit 3/4** or compatible programmer
 - **Terminal Emulator** (PuTTY, TeraTerm, or Arduino Serial Monitor)
 
+⚠️ **Important**: MPASM is deprecated! You must use **PIC-AS** (part of XC8) for MPLAB X v5.40+.
+
 ### Building the Project
 
-1. **Open MPLAB X IDE**
+#### For Modern MPLAB X (v5.40+) - Use PIC-AS
+
+1. **Install Tools**:
+   - Download MPLAB X IDE v5.40+ from [Microchip](https://www.microchip.com/mplab/mplab-x-ide)
+   - Download MPLAB XC8 Compiler from [Microchip](https://www.microchip.com/mplab/compilers)
+
 2. **Create New Project**:
    - Select "Microchip Embedded" → "Standalone Project"
    - Device: PIC18F45K22
    - Tool: PICkit 3/4 (or simulator)
-   - Compiler: Microchip MPASM Assembler
+   - Compiler: **XC8** (not MPASM!)
 
 3. **Add Source Files**:
-   - Add `main.asm` as the main source file
-   - All modules are included via `#include` directives
+   - Add `main.S` (capital S!) as the main source file
+   - PIC-AS uses `.S` extension, not `.asm`
+   - See [MIGRATION_TO_PIC-AS.md](MIGRATION_TO_PIC-AS.md) for syntax differences
 
 4. **Build Project**:
    - Click "Clean and Build" (hammer icon)
@@ -117,6 +135,13 @@ UART |18 23| RD3  <- RC6 (RX)
    - Connect PICkit to PC and target board
    - Click "Make and Program Device"
    - Wait for "Programming/Verify complete" message
+
+#### For Legacy MPLAB X (v5.35 or older) - MPASM (Deprecated)
+
+If using an older version with MPASM:
+- Use `main.asm` and other `.asm` files
+- Select "MPASM" as compiler
+- **Note**: This is deprecated and not recommended for new projects
 
 ### Simulating Without Hardware
 
@@ -230,25 +255,42 @@ BLACK: e7-e5
 
 ```
 Chess-in-assembly/
-├── main.asm              # Main program entry point
-├── config.inc            # Configuration bits
-├── definitions.inc       # Constants and macros
-├── memory.inc            # Memory map
-├── board.asm             # Board representation
-├── uart.asm              # Serial communication
-├── movegen.asm           # Move generation engine
-├── makemove.asm          # Make/unmake moves
-├── check.asm             # Check/checkmate detection
-├── evaluate.asm          # Position evaluation
-├── ai_level1.asm         # Level 1 AI (random)
-├── ai_level2.asm         # Level 2 AI (evaluation)
-├── ai_level3.asm         # Level 3 AI (minimax)
-├── display.asm           # Board display
-├── parser.asm            # Command parser
-├── tests/
-│   └── test_board.asm    # Unit tests
-├── DESIGN_DOCUMENT.md    # Detailed design documentation
-└── README.md             # This file
+├── Modern PIC-AS Files (.S) - Use These!
+│   ├── main.S                   # Main program (PIC-AS syntax)
+│   ├── config_pic-as.inc        # Configuration bits (PIC-AS)
+│   └── [Other .S files to be converted]
+│
+├── Legacy MPASM Files (.asm) - Reference Only
+│   ├── main.asm                 # Main program (MPASM - deprecated)
+│   ├── config.inc               # Configuration bits
+│   ├── definitions.inc          # Constants and macros
+│   ├── memory.inc               # Memory map
+│   ├── board.asm                # Board representation
+│   ├── uart.asm                 # Serial communication
+│   ├── movegen.asm              # Move generation engine
+│   ├── makemove.asm             # Make/unmake moves
+│   ├── check.asm                # Check/checkmate detection
+│   ├── evaluate.asm             # Position evaluation
+│   ├── ai_level1.asm            # Level 1 AI (random)
+│   ├── ai_level2.asm            # Level 2 AI (evaluation)
+│   ├── ai_level3.asm            # Level 3 AI (minimax)
+│   ├── display.asm              # Board display
+│   └── parser.asm               # Command parser
+│
+├── Documentation
+│   ├── README.md                # This file
+│   ├── MIGRATION_TO_PIC-AS.md   # ⭐ Conversion guide
+│   ├── USER_MANUAL.md           # End-user guide
+│   ├── BUILD_GUIDE.md           # Developer guide
+│   ├── DESIGN_DOCUMENT.md       # Systems design
+│   ├── TESTING_CHECKLIST.md     # Test procedures
+│   └── PROJECT_SUMMARY.md       # Executive summary
+│
+└── Tests
+    └── test_board.asm           # Unit tests
+
+⚠️ Note: .asm files are MPASM (deprecated). Use .S files for PIC-AS!
+See MIGRATION_TO_PIC-AS.md for conversion details.
 ```
 
 ## Technical Details
